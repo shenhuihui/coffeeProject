@@ -1,0 +1,108 @@
+@charset "utf-8";
+*{margin:0; padding:0; list-style:none; font-family:'微软雅黑', Arial; font-size:.16rem; text-decoration:none;}
+html, body{font-size:calc(100vw/3.75);width:100%; height:100%;overflow-x:hidden;background: #eaebeb;}
+.viewHeader{
+	width: 80%;
+	margin-top: 15%;
+	margin-left: 5%;
+	
+	
+	
+}
+.eleyin{
+	width: 20%;
+	
+	
+	
+}
+.eleyin img{
+	width: 70%;
+	height: 80%;
+	margin-top: -10%;
+}
+.thanking{	
+	width: 65%;
+	margin-left: 30%;
+	margin-top: -20%;
+		
+}
+.tupian{
+	background: #feffff;
+    height:100%;
+    position: relative;
+    text-align: center;
+    top: 0.3rem;
+}
+.thanking img{
+	width: 120%;
+	height: 2.15rem;
+	margin-left: -15%;
+}
+.greet{
+	margin-top: -100%;
+	text-indent:30px;
+}
+.member{
+	text-indent:30px;
+	margin-top:20%; 
+}
+.member a{
+	line-height: 10%;
+	color: #80b2ff;
+}
+
+.part1 {
+    height: .38rem;
+    position: relative;
+}
+.coupon {
+    position: absolute;
+    height: .38rem;
+    line-height: .42rem;
+    margin-left: .2rem;
+    margin-top: -.01rem;
+}
+.couponDate {
+    position: absolute;
+    height: .68rem;
+    line-height: .28rem;
+    right: 2.97rem;
+    color: #626262;
+    top: 0.30rem;
+}
+
+
+
+.foot {
+	
+	background: #feffff;
+    height:35%;
+    position: relative;
+    text-align: center;
+    top: 0.8rem;
+}
+.foot img {
+    width: 90%;
+    height:80%;
+}
+
+.viewFooter {
+    width: 100%;
+    height: .44rem;
+    margin-bottom: .12rem;
+    position: relative;
+    background-color: white;
+}
+.viewFooter>.header {
+    margin: .01rem 0.5rem .15rem;
+    position: absolute;
+     color: #c5c5cb;
+}
+.viewFooter >.discount {
+    position: absolute;
+    color: #c5c5cb;
+    margin-left: 40%;
+    margin-top: .01rem;
+}
+
+ 

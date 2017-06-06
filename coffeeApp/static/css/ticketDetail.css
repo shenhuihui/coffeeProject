@@ -1,0 +1,176 @@
+*{margin:0; padding:0; list-style:none; font-family:'΢���ź�', Arial; font-size:.16rem; text-decoration:none;}
+html, body{font-size:calc(100vw/3.75);width:100%; height:100%;overflow-x:hidden;background: #38393e;
+
+}
+.beiyingtu{
+	width: 100%;
+	height: 10%;
+
+
+}
+.beiyingtu img{
+	width: 100%;
+	height: 200%;
+	margin-top: -10%;
+
+}
+.beiying{
+	position: absolute;
+	background: #ffffff;
+	height:65%;
+	width: 100%;
+	margin-top: -10%;
+}
+
+.head {
+	width: 100%;
+    height: auto;
+    position: relative;
+    text-align: center;
+    top: 0.6rem;
+    z-index: 3;
+}
+.head img {
+
+    width:80%;
+    background: #feffff;
+    height: 10%;
+    box-shadow: 2px 0px 6px #eaeaea;
+    /*border-left: 3px solid #eaeaea;
+    border-top: 3px solid #eaeaea;
+    border-right: 3px solid #eaeaea;*/
+}
+.barcode{
+	width: 80%;
+	height:8%;
+	margin-top:8%;
+	margin-left: 10%;
+	background: #bbdc9b;
+	box-shadow: 2px 4px 6px #eaeaea;
+
+
+
+
+}
+.barcode>.header {
+    margin: .1rem 0.10rem .1rem;
+    position: absolute;
+     color:#787f71;
+}
+.barcode>.discount {
+    position: absolute;
+    color: #fefeff;
+    margin-left: 75%;
+    margin-top: .01rem;
+}
+.barcode1{
+	width: 80%;
+	height:10%;
+	margin-top:5%;
+	margin-left: 7%;
+	background: #ffffff;
+
+
+
+}
+.barcode1>.header {
+    margin: .05rem 0.19rem .15rem;
+    position: absolute;
+     color:#484949;
+}
+.barcode1>.discount {
+    position: absolute;
+    color:#eaeaea;
+    margin-left: 80%;
+    margin-top: .05rem;
+}
+.barcode2{
+	width: 80%;
+	height:5%;
+	margin-top: 1%;
+	margin-left: 7%;
+
+
+
+}
+.barcode2>.header {
+    margin: .05rem 0.19rem .15rem;
+    position: absolute;
+     color:#484949;
+}
+.barcode2>.discount {
+    position: absolute;
+    color:#eaeaea;
+    margin-left: 80%;
+    margin-top: .1rem;
+}
+
+.num{
+	width: 80%;
+	height:8%;
+	margin-top: 0%;
+	margin-left: 10%;
+	background:#ffffff;
+	box-shadow: 2px 4px 6px #eaeaea;
+
+}
+.chen{
+margin-left:94%;
+}
+.teacup{
+	width: 100%;
+
+
+}
+.teacup img{
+	width: 20%;
+	height: 5%;
+	border-radius:20%;
+	margin-left: 40%;
+	margin-top: -6%;
+
+
+}
+.shiyong button{
+	width: 35%;
+	height: 0.35rem;
+	border-radius:5%;
+	margin-left:33%;
+	margin-top: 3.5%;
+	background: #77b937;
+	color: #feffff;
+	border: 0px solid;
+	margin-bottom: 8%;
+
+}
+.date{
+
+
+	width: 78%;
+	height:10%;
+	margin-top: 0.38rem;
+
+	margin: auto;
+}
+.shijian{
+
+ margin-left: 5%;
+font-size:  0.1rem;
+
+
+}
+.gongshi{
+
+
+margin-left: 30%;
+ width: 140%;
+ font-size:  0.1rem;
+ color: #77b937;
+}
+#on{
+border-bottom:1px dashed #eaeaea;
+width:81%;
+margin-left: 9%;
+margin-top: -1%;
+
+}

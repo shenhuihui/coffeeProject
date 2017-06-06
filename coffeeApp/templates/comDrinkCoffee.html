@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <link rel="stylesheet" href="{% static 'css/drinkCoffee.css' %}" media="screen" title="no title" charset="utf-8">
+    <script type="text/javascript" src="{% static 'js/vue1.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/reqwest.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/jweixin-1.2.0.js' %}"></script>
+    <title></title>
+  </head>
+  <body id="app" ontouchstart="" v-cloak>
+    {% verbatim %}
+      <div v-for="comment in comments" class="productList">
+          <div class="product" v-on:click="makeCoffee(comment)">
+              <div class="avatarView">
+                  <img class="avatar" v-bind:src="comment.pictureUrl" alt="" />
+              </div>
+              <div class="content">
+                  <p style="text-overflow: ellipsis;overflow: hidden;white-space: nowrap;">{{ comment.name }}</p>
+                  <p style="font-size:.13rem;color:#989898">{{ comment.summary }}</p>
+                  <p style="position:absolute;">
+                    ￥{{ comment.originalPrice }}
+                    <div style="background-color:red;width:.6rem;height:.01rem;position:absolute;margin-top:.13rem;" v-if="comment.price<comment.originalPrice"></div>
+                    <p v-if="comment.price<comment.originalPrice" style="left:.7rem;position:absolute;color:red;font-size:.18rem;font-weight:bold;margin-top:-.02rem;">￥{{ comment.price }}</p>
+                  </p>
+                  <p style="font-size:.13rem;margin-top:.38rem;">
+                       销量：{{ comment.sales }}件
+                  </p>
+              </div>
+              <div class="addImage"></div>
+          </div>
+      </div>
+      {% endverbatim %}
+  </body>
+  <script>
+  var vm = new Vue({
+      el:"#app",
+      data:{
+          comments:[
+          ],
+      },
+      methods:{
+        getData:function () {
+            var self = this;
+            self.comments = [];
+            reqwest({
+                url:localStorage.url+"products?page=1&size=100",
+                type:"json",
+                method:"get",
+                success:function (resp) {
+                  if (resp.result == false) {
+     							 alert(resp.message);
+     							 return;
+     						 }
+                    self.comments = resp.data.rows;
+                },
+                error:function(){
+                  alert("请求超时");
+                }
+            })
+        },
+        // addProduct:function (productID){
+        //   var self = this;
+        //   // self.makeCoffee(productID,"10296");
+        //   // return;
+        //           wx.scanQRCode({
+        //             needResult: 1,
+        //             scanType: ["qrCode","barCode"],
+        //             success: function (res) {
+        //                 self.makeCoffee(productID,res.resultStr);
+        //             },
+        //             fail: function (res) {
+        //               alert(res.errMsg);
+        //             }
+        //           });
+        // },
+        makeCoffee:function(pram){
+          localStorage.productID = pram.id;
+          localStorage.configId = pram.id;
+          localStorage.isFromCom = true;
+                // var self = this;
+                // var dict = {'cooperativePartnerId': 1,'customConfig': {'coffee': 2,'milk': 3,'sugar': 2},'memberId': localStorage.memberId,'password': "mk123456",'productId': pram1,'vmc': pram2}
+                // console.log(dict);
+                // console.log(JSON.stringify(dict));
+                // // return;
+                // reqwest({
+                //     url:localStorage.url+"makeCoffeesByCooperativePartnerProductId",
+                //     type:"json",
+                //     contentType: "application/json",
+                //     method:"post",
+                //     data:JSON.stringify(dict),
+                //     success:function (resp) {
+                //       if (resp.result == true) {
+                //         alert("领取成功");
+                //       }
+                //       else {
+                //           alert("领取失败");
+                //       }
+                //     }
+                // })
+                window.location.href = "/customConfig";
+              },
+      },
+      ready:function () {
+        this.getData();
+      }
+    });
+  </script>
+</html>

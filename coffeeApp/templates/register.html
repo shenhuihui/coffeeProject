@@ -1,0 +1,113 @@
+<!DOCTYPE HTML>
+{% load staticfiles %}
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+<title>注册</title>
+<link rel="stylesheet" href="{% static 'css/register.css' %}"  type="text/css">
+<script type="text/javascript" src="{% static 'js/jquery-1.11.3.min.js' %}"></script>
+</head>
+<body>
+<div class="headView">
+<div class="register">
+ 注册会员
+</div>
+</div>
+<div class="form">
+	<div class="div-phone">
+		<label for="phone">手机号码:</label><input type="text" id="phone" class="infos" placeholder="手机号码">
+	</div>
+  <div class="noteDiv">
+    <p class="note"></p>
+  </div>
+	<div class="div-ranks">
+		<label for="ranks">短信验证:</label><input type="text" id="ranks" class="code" placeholder="验证码">
+		<a class="yz" onclick="yzm()"> 短信验证</a>
+	</div>
+	<!--<div class="div-birthday">
+		<label for="birthday">输入生日:</label><input type="text" id="birthday" class="infos" placeholder="年月日">
+		<div class="calendar" ><img src="../static/images/ic_register_time_h.png" /></div>
+	</div>-->
+	<div class="div-conform">
+		<a class="conform" onclick="register()"> 注册 </a>
+	</div>
+
+	<div class="footView">
+		<p class="member">
+			成为会员，即可获赠一杯咖啡
+		</p>
+	</div>
+</div>
+</body>
+<script>
+	/*日期选择*/
+	// $("#birthday").dateDropper({
+	// 	annimate:false,
+	// 	format:'Y-m-d',
+	// 	maxYear:'2017',
+	// });
+
+  function validatemobile(mobile)
+     {
+         if(mobile.length!=11)
+         {
+             $('.infos').focus();
+             return false;
+         }
+
+         var myreg = /^(((13[0-9]{1})|(15[0-9]{1})|(18[0-9]{1}))+\d{8})$/;
+         if(!myreg.test(mobile))
+         {
+             alert('请输入有效的手机号码！');
+             $('.infos').focus();
+             return false;
+         }
+     }
+
+	/*验证码*/
+	function yzm(){
+	var phoneNum = $('.infos').val();
+  console.log(localStorage.url+"verificationCode/"+phoneNum);
+	$.ajax({
+	   type: "POST",
+	   url: localStorage.url+"verificationCode/"+phoneNum,
+	   dataType: "json",
+	   success: function(msg){
+		if(msg.result==true){
+			alert("验证码已发出 请留意短信接收");
+		}else{
+			alert(msg.message);
+		}
+	   }
+	});
+
+}
+
+	/*注册*/
+	function register(){
+	var phoneNum = $('.infos').val();
+	var code = $('.code').val();
+	$.ajax({
+	   type: "POST",
+	   url: localStorage.url+"registerPhoneByBindOpenId",
+	   dataType: "json",
+     contentType: "application/json",
+     data:JSON.stringify({'code':code,'phone':phoneNum,'openId':localStorage.openId}),
+	   success: function(msg){
+       console.log(msg);
+		if(msg.result==true){
+			alert("注册成功");
+      localStorage.isRegist = true;
+      window.location = "/memberCenter";
+		}else{
+			alert("注册失败");
+		}
+	   }
+	});
+
+}
+
+</script>
+</html>

@@ -1,0 +1,53 @@
+/* CSS Document */
+body{
+	width: 100%;
+	height: 100%;
+	background:url(../images/bg-Land.png) no-repeat center fixed;
+	-webkit-background-size:100% 100%;
+	font-family:"Î¢ÈíÑÅºÚ";
+}
+.
+::-moz-placeholder { color:#FFF; font-size:0.8rem;}
+::-webkit-input-placeholder { color:#FFF; font-size:0.8rem;}
+:-ms-input-placeholder { color:#FFF; font-size:0.8rem;}
+a{ color:#FFF;	}
+a:hover{ color:#FFF;}
+/*content*/
+.form-box{ width:80%; margin:0 auto;}
+.content-tilte{ color:#FFF; font-size:1.5rem; margin-top:2rem; text-align:center;}
+
+.input-form{position:relative; height:5.4rem;border-radius: 20dp;filter:alpha(Opacity=60);-moz-opacity:0.6;opacity: 0.6;}
+.input-form img{ position:absolute; width:1.6rem; height:1.4rem; margin:0.3rem 0.3rem;}
+
+.input-form .inputstyle-code{ position:absolute; height:1.2rem; width:4rem; right:0.2rem; border-left:2px solid #fff; bottom:0.8rem; font-size:0.7rem; color:#0C6;}
+.inputstyle{ height:2rem; width:100%; background-color:rgba(0,0,0,0.1); color:#FFF; padding:0.3rem 0.3rem 0.3rem 2rem; border-radius:0.1rem}
+.inputstyle-c{ height:2rem; width:100%; background-color:rgba(0,0,0,0.1); color:#FFF; padding:0.3rem 4rem 0.3rem 2rem; border-radius:0.1rem}
+
+
+.input-form input[type=text]:focus, input[type=password]:focus {
+    border: 2px solid #768CF8;
+}
+.checkbox{ font-size:0.8rem; color:#FFF;}
+.checkbox input{ width:0.9rem; height:0.9rem; position:relative; top:0.2rem;}
+.sub input{ width:100%; height:2rem; color:#FFF; font-size:1.2rem; text-align:center; background-color:#309C35; border-radius:0.1rem;}
+.newuer p{ color:#FFF; font-size:0.7rem; margin:0.5rem 0; text-align:center;}
+.or .division{ display:inline-block; width:45%; border-bottom:1px solid #fff; margin-top:0.7rem;}
+.or{ text-align:center;}
+.or .txt-or{ text-align:center; color:#FFF; margin:0 0.1rem;}
+
+
+html{ font-size:20px;}
+body{ padding:0; margin:0; font-family:"Î¢ÈíÑÅºÚ";}
+body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, code, form, fieldset, legend, input, textarea, p, blockquote, th, td{
+padding:0;
+margin: 0;
+}
+ul ,li{list-style:none;}
+.aui-bar{ background-color:}
+.head-txt{ position:relative;bottom:0.5rem;}
+.aui-bar{ background-color:#373B3E;}
+.aui-iconfont img{ margin-top:0.3rem;}
+
+.lin{ width:100%; height:1rem; clear:both; line-height:1rem;}
+.lins{ width:100%; height:3rem; clear:both; line-height:0.7rem;}
+.linm{ width:100%; height:0.05rem; clear:both; line-height:0.05rem;}

@@ -1,0 +1,36 @@
+*{margin:0; padding:0; list-style:none; font-family:'微软雅黑', Arial; font-size:.16rem; text-decoration:none;}
+html{font-size:calc(100vw/3.75);}
+html, body{width:100%; height:100%;position: relative;-webkit-overflow-scrolling: touch;overflow:auto;overflow-x:hidden;}
+body{background-color:#ffffff;}
+[v-cloak] {
+    display: none !important;
+}
+.wallet {
+  background: url(../images/bg_wallet.png) center center no-repeat; background-size:100% 100%; width: 100%; height: 0;
+  padding-bottom: 120%;
+}
+.avatar{
+  position: absolute;height: .64rem;left: 0.35rem;top: .2rem;width: .64rem;
+}
+.edou{
+  background: url(../images/ic_wallet_frame.png) center center no-repeat;background-size:100% 100%;
+  width: 1.98rem;height: .44rem;position: absolute;left: 1.13rem;top: .3rem;
+}
+.EImage{
+	background: url(../images/ic_wallet_coffee.png) center center no-repeat;background-size:100% 100%;position: absolute;
+  width: .25rem;height: .25rem;left: .26rem;top: .1rem;
+}
+ .wenzi{
+	color: #656565;font-size:0.2rem;text-align: center;width: 1.3rem;left: .51rem;position: absolute;line-height: .44rem;
+ }
+ .recharge {
+position: absolute;width: 3.0rem;left: 0.4rem;height: .54rem;top: 5.3rem;text-align: center;line-height: .5rem;font-size: .28rem;background: #78b937;color: #fffbfb;border-radius:15%;margin:auto;
+}
+.balance{
+position: absolute;width: 3.0rem;left: 0.4rem;height: .54rem;top:5.9rem;text-align: center;font-size: .28rem;color: #919191;margin:auto;
+
+}
+.yue{
+	color: #78b937;
+	font-size: .18rem;
+}

@@ -1,0 +1,95 @@
+*{margin:0; padding:0; list-style:none; font-family:'微软雅黑', Arial; font-size:.16rem; text-decoration:none;}
+html{font-size:calc(100vw/3.75);}
+html, body{width:100%; height:100%;position: relative;-webkit-overflow-scrolling: touch;overflow:auto;overflow-x:hidden;}
+.viewHeader {
+  width: 100%;height: .44rem;margin-bottom: .16rem;position: relative;
+}
+[v-cloak] {
+    display: none !important;
+}
+.viewHeader>.header {
+  margin: .16rem 0 .16rem .47rem;position: absolute;
+}
+.viewHeader>.discount {
+  position: absolute;color: red;right: .16rem;margin-top: .16rem;
+}
+.addImage {
+  margin-left: .15rem;
+margin-top: 0.52rem;
+width: .22rem;height: .22rem;
+background:url(../images/iocn-Check-s.png) center center no-repeat; background-size: contain;
+position: absolute;
+}
+.addImage.check {
+  margin-left: .15rem;
+  margin-top: 0.52rem;
+  width: .22rem;height: .22rem;
+  background:url(../images/iocn-Check-h.png) center center no-repeat;background-size: contain;
+  position: absolute;
+}
+.allAddImage {
+  margin-left: .15rem;margin-top: 0.19rem;width: .52rem;height: .22rem;background:url(../images/iocn-Check-s.png) center center no-repeat; background-size: contain;position: absolute;
+}
+.allAddImage.check {
+  margin-left: .15rem;margin-top: 0.19rem;width: .52rem;height: .22rem;background:url(../images/iocn-Check-h.png) center center no-repeat; background-size: contain;position: absolute;
+}
+.productView {
+  position: relative;padding-bottom: .65rem;
+}
+.productList {
+  position: relative;
+}
+.product {
+  border-style: solid none none none;border-width: .01rem;border-color: #9a9a9a;width: 100%;height: 1.28rem;
+}
+.avatarView {
+  width: 1rem;height: 1rem;border-style: solid;border-width: .01rem;border-radius: .09rem;margin: .14rem 0 .14rem .6rem;position: absolute;
+}
+.avatar {
+  border: 0;
+  border-radius: .09rem;
+  width: 1rem;
+  height: 1rem;
+}
+.content {
+  margin-top: .14rem;margin-left: 1.78rem;position: absolute;
+}
+.handleView {
+  width: 1rem;height: .3rem;border-style: solid;border-width: .01rem;border-radius: .02rem;border-color: #9a9a9a;margin-top: .82rem;margin-left: 2.5rem;box-sizing:border-box;position: absolute;
+}
+.productMinus {
+  width: .29rem;height: .29rem;line-height:.25rem;position: absolute;font-size: .32rem;text-align: center;box-sizing:border-box;border-style: none solid none none;border-width: .01rem;border-color: #9a9a9a;
+}
+.productNum {
+  width: .43rem;height: .29rem;line-height:.29rem;position: absolute;margin-left: .3rem;text-align: center;box-sizing:border-box;border-style: none solid none none;border-width: .01rem;border-color: #9a9a9a;
+}
+.productAdd {
+  width: .29rem;height: .29rem;line-height:.25rem;position: absolute;margin-left: .71rem;font-size: .32rem;text-align: center;box-sizing:border-box;
+}
+.viewFooter {
+  width: 100%;height: .6rem;position: fixed;bottom: 0rem;background-color: #f2f2f2;
+}
+.viewFooter > .header.all {
+    margin-left: .47rem;
+    height: .6rem;
+    line-height: .6rem;
+    position: absolute;
+}
+.viewFooter > .header.count {
+    margin-left: 1rem;
+    height: .6rem;
+    line-height: .6rem;
+    position: absolute;
+    color: #000000;
+}
+
+.payBtn {
+    color: white;
+    text-align: center;
+    margin-left: 2.6rem;
+    width: 1rem;
+    height: .6rem;
+    line-height: .6rem;
+    position: absolute;
+    background: #f23030;
+}

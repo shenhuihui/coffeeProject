@@ -1,0 +1,56 @@
+*{margin:0; padding:0; list-style:none; font-family:'΢���ź�', Arial; font-size:.16rem; text-decoration:none;}
+html{font-size:calc(100vw/3.75);}
+html, body{width:100%; height:100%;position: relative;-webkit-overflow-scrolling: touch;overflow:auto;overflow-x:hidden;}
+body{background-color:#efeef4;}
+.cancleBtn {
+position: absolute;width: 0.8rem;height: .24rem;border: solid;border-width: .01rem;right: 0.1rem;top: -0.3rem;text-align: center;line-height: .22rem;color:#b3d395;font-size0.5rem; border-radius: 18%;
+}
+.productView {
+  position: relative;padding-bottom:66px;
+
+
+}
+.product {
+  width:100%;margin-top:.05rem;position: relative;
+
+
+}
+.comments{
+
+}
+
+
+.part2 {
+  width: 100%;
+  height: auto;
+  position: relative;
+  margin-bottom: -18%;;
+
+
+}
+.part2 img{
+	width: 100%;
+	height: 120%;
+}
+
+.first {
+    position: relative;left: 1.3rem;color: #989898;font-size: .1rem;margin-bottom: .1rem;top:-1.1rem;color: #ff0000;
+}
+.productDetail {
+    position: relative;
+}
+.coffee {
+    height: .3rem;position: relative;
+}
+.employ {
+  left: 1.3rem;position: absolute;top: -1.1rem;color: #9f9f9f;
+}
+.coffeeNum {
+  right: .1rem;position: absolute;top: -0.8rem;color: #9f9f9f;
+}
+.failure{
+ left: 1.3rem;position: absolute;top: -0.9rem;color: #9f9f9f;
+}
+.drinkCoffee {
+position: absolute;width: 1.0rem;height: .24rem;right: 1.4rem;bottom: 0rem;text-align: center;line-height: .22rem;font-size: .14rem;background: #78b937;color: #fffbfb;margin: auto;
+}

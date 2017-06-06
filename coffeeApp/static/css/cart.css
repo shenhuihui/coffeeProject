@@ -1,0 +1,125 @@
+*{margin:0; padding:0; list-style:none; font-family:'微软雅黑', Arial; font-size:.16rem; text-decoration:none;}
+html{font-size:calc(100vw/3.75);}
+html, body{width:100%; height:100%;position: relative;-webkit-overflow-scrolling: touch;overflow:auto;overflow-x:hidden;}
+[v-cloak] {
+    display: none !important;
+}
+.productView {
+  position: relative;
+}
+.productList {
+  position: relative;
+}
+.product {
+  width: 100%;height: .6rem;
+}
+.avatarView {
+  width: .4rem;height: .4rem;border-style: solid;border-width: .01rem;border-radius: .03rem;position: absolute;
+	left:.15rem;top: .1rem;
+}
+.avatar {
+  border: 0;
+  border-radius: .03rem;
+  width: .4rem;
+  height: .4rem;
+}
+.content {
+  position: absolute;left: .7rem;height: .6rem;line-height: .6rem;font-size: .13rem;right: 0;
+}
+
+.footerView {
+  position: relative;padding-bottom: .2rem;
+}
+.wukeyong {
+	  border-bottom: 1px solid #dfdfe0;
+		border-top: 1px solid #dfdfe0;
+    width: 100%;
+    height: .45rem;
+    position: relative;
+}
+.wukeyong>.header {
+    top: 0.1rem;
+    left: .21rem;
+    position: absolute;
+}
+.wukeyong>.discount {
+    position: absolute;
+    right: .2rem;
+    top: .1rem;
+}
+.discount img{
+	width: 15px;
+	height: 15px;
+	padding-right: 0;
+}
+.edou {
+	margin-top: -.03rem;
+    width: 100%;
+    height: .45rem;
+    margin-bottom: .12rem;
+    position: relative;
+    border-bottom: 1px solid #dfdfe0;
+}
+.edou>.header1 {
+    margin: 0.1rem 0.2rem 0.21rem;
+    position: absolute;
+}
+
+.edou>.discount1 {
+  position: absolute;
+  right: .2rem;
+  top: .1rem;
+}
+.discount1 img{
+	width: 15px;
+	height: 15px;
+	padding-right: 0;
+}
+.zonge {
+	border-bottom: 1px solid #dfdfe0;
+	margin-top: .12rem;
+    width: 100%;
+    height: 0.65rem;
+    position: relative;
+
+}
+.zonge>.spzonge {
+    margin: 0.01rem 0.21rem 0.01rem;
+    position: absolute;
+}
+
+.zonge>.price1 {
+    position: absolute;
+    color: red;
+    right: .2rem;
+    top: -0.01rem;
+}
+.zonge>.lijian {
+	color: #d0d0d0;
+    margin: 0.25rem 0.2rem 0.2rem;
+    position: absolute;
+    font-size: 0.08rem;
+}
+
+.zonge>.jiane {
+    position: absolute;
+    color: red;
+    right:.2rem;
+    top: 0.2rem;
+}
+.shifu {
+    width: 100%;
+    height: 0.4rem;
+    margin-top: .12rem;
+    position: relative;
+		border-bottom: 1px solid #dfdfe0;
+}
+.shifu>.shikuan {
+    position: absolute;
+    right:.2rem;
+    top: -0.02rem;
+}
+.payBtn {
+	background: rgb(255, 68, 0);width: 1.2rem;height: .4rem;
+	color: white;text-align: center;line-height: .4rem;margin: 0 auto;margin-top: .1rem;
+}

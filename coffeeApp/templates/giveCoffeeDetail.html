@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <script type="text/javascript" src="{% static 'js/vue1.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/jweixin-1.2.0.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/reqwest.js' %}"></script>
+    <title></title>
+    <style type="text/css">
+      *{margin:0; padding: 0;list-style:none; font-family:'微软雅黑', Arial; text-decoration:none;}
+      html, body{width:100%; height:100%;overflow-x:hidden;position: relative;text-align: center;line-height: 35px;
+      background-color: rgb(241,241,241);}
+      [v-cloak] {
+          display: none !important;
+      }
+      .viewHeader {
+        width:100%;height: 40px;background: #76b133;font-size: 20px;color: white;
+      }
+      .content {
+        width:100%;background-color: white;height: auto;border-style: none none solid none;  border-width: 1px;
+          border-color: #76b133;padding: 20px 0px;margin-bottom: 30px;
+      }
+      .avatarView {
+        width: 100px;height: 100px;border-style: solid;border-width: 1px;border-radius: 9px;margin: 0 auto;;
+      }
+      .avatar {
+        border: 0;border-radius: 9px;width: 100px;height: 100px;
+      }
+      .handle {
+        width: 200px;height: 40px;background-color: #76b133;border-radius: 9px;color: white;margin: 0 auto;
+      }
+      #goodcover {
+      	position: absolute;top: 0;left: 0;width: 100%;height:100%;background-color: black;
+        z-index: 100;opacity: 0.50;
+      }
+      .coverContent {
+        z-index: 200;color: white;position: absolute;top: 20px;right: 20px;width:160px;line-height: 25px;
+      }
+      .arrow {
+        background:url({% static 'images/roateArrow.png' %}) center center no-repeat; background-size:100% 100%;
+				width: 41px;height: 40px;left: 80px;position: absolute;
+      }
+      .text {
+        position: relative;margin-top: 40px;width:200px;
+      }
+    </style>
+  </head>
+  <body id="app" ontouchstart="" v-cloak>
+    {% verbatim %}
+    <div class="viewHeader">送好友</div>
+    <div class="content">
+
+      <div class="avatarView">
+          <img v-bind:src="comment.product.pictureUrl" alt="" class="avatar" />
+      </div>
+      <p>{{ comment.product.name }} ×1</p>
+      <p>￥{{ comment.product.price }}</p>
+    </div>
+    <div class="handle" v-show="!coverShow" v-on:click="hideCover">
+      请TA喝咖啡
+    </div>
+    {% endverbatim %}
+    <div id="goodcover" v-on:click="hideCover" v-show="coverShow"></div>
+    <div class="coverContent" v-show="coverShow">
+        <div class="arrow">
+        </div>
+        <div class="text">
+          <p style="text-align:left;">点击右上角&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+          <p>把它发送给指定好友</p>
+          <p>请TA喝咖啡</p>
+        </div>
+    </div>
+  </body>
+  <script>
+  var vm  = new Vue({
+   el:"#app",
+   data:{
+     comment:JSON.parse(localStorage.giveCoffee),
+     coverShow:false,
+   },
+   methods:{
+     hideCover:function() {
+       this.coverShow = !this.coverShow;
+     },
+     wxconfig:function() {
+       var url = window.location.href;
+       var toUrl = url.substring(0,url.length-17)+"givingCoffee/"+this.comment.id;
+       console.log(toUrl);
+       reqwest({
+           url:localStorage.url+"getConfigInfo",
+           type:"json",
+           method:"get",
+           data:{url:window.location.href},
+           success:function (resp) {
+             if (resp.result == false) {
+              alert(resp.message);
+              return;
+            }
+             wx.config({
+               debug: false,
+               appId: resp.data.appId,
+               timestamp: resp.data.timestamp,
+               nonceStr: resp.data.nonceStr,
+               signature: resp.data.signature,
+               jsApiList: [
+                   "onMenuShareAppMessage"
+                 ]
+             });
+             wx.ready(function() {
+               wx.onMenuShareAppMessage({
+                 title: '请你喝咖啡', // 分享标题
+                 desc: '多种口味任选，到任一E乐饮咖啡机均可领取', // 分享描述
+                 link: toUrl, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+                 imgUrl: 'http://omsg526i0.bkt.clouddn.com/FoUXlmZDb1yp-SzZsZKfBE8puAhG', // 分享图标
+                 type: 'link', // 分享类型,music、video或link，不填默认为link
+                 dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
+                 success: function () {
+                 },
+                 cancel: function () {
+                 }
+               });
+             });
+             wx.error(function(res){
+                 alert(res.errMsg);
+             });
+           },
+           error:function(){
+             alert("请求超时");
+           }
+       })
+     }
+   },
+   ready:function () {
+       this.wxconfig();
+   }
+ });
+  </script>
+</html>

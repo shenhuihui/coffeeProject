@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <link rel="stylesheet" href="{% static 'css/notDraw.css' %}" media="screen" title="no title" charset="utf-8">
+    <script type="text/javascript" src="{% static 'js/vue1.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/reqwest.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/jweixin-1.2.0.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'css/weui.min.css' %}">
+    <title>待领取</title>
+  </head>
+  <body id="app" ontouchstart="" v-cloak>
+    <div v-show="hasData">
+      {% verbatim %}
+      <div v-for="comment in comments" class="">
+        <div class="product">
+            <div class="avatarView">
+                <img class="avatar" v-bind:src="comment.product.pictureUrl" alt="" />
+            </div>
+            <!--<div class="content">
+                <header class="author">E乐饮  </header>
+            </div>
+            <header class="price">数量：1</header>-->
+  	         <div class="coffeeName">
+  	                        {{ comment.product.name }}
+  	         </div>
+  	         <div class="coffeeNum">
+  	                        数量：1
+  	        </div>
+            <header class="count">兑换码：{{ comment.conversionCode }}</header>
+            <div class="handleView" v-on:click="makeCoffee(comment)">
+                          领取
+            </div>
+        </div>
+      </div>
+
+       <!--<div v-for="comment in comments.shoppingCarts" class="">
+        <div class="product">
+            <div class="avatarView">
+                <img class="avatar" v-bind:src="comment.product.pictureUrl" alt="" />
+            </div>
+            <div class="content">
+                <header class="author">E乐饮  </header>
+            </div>
+            <header class="price">数量：1</header>
+            <header class="count" v-on:click="getconversionCodes(comments.id,comment.id)>兑换码：123456789</header>
+            <div class="handleView" v-on:click="">
+            待领取</div>
+        </div>
+      </div>-->
+
+
+
+    </div>
+    <div id="notData" style="width: 100%;height: 50%;text-align: center;margin-top:.2rem;" v-show="!hasData">
+      <a href="/index">
+        <span class="context" style="font-size:.2rem;">
+        {{ loadingTest }}
+        </span>
+      </a>
+    </div>
+    {% endverbatim %}
+<!-- loading toast -->
+   <div id="loadingToast" v-show="toastShow">
+       <div class="weui-mask_transparent"></div>
+       <div class="weui-toast">
+           <i class="weui-loading weui-icon_toast"></i>
+           <p class="weui-toast__content">制作咖啡中</p>
+       </div>
+   </div>
+
+    <script>
+    	var vm = new Vue({
+    		el:"#app",
+    		data:{
+          loadingTest:"加载中...",
+          hasData:false,
+          toastShow:false,
+    			 modal:{
+                   show:true,
+                  },
+    			comments:[],
+    			 conversionCodes:[],
+           buttonStyle1:"position:absolute;width:.5rem;height:.22rem;box-sizing:border-box;right: .2rem;bottom: .06rem;background-color: rgb(121, 185, 55);border-radius: .02rem;color: white;text-align: center;font-size: .12rem;line-height: .22rem;border: none;pointer-events: auto;",
+           buttonStyle2:"position:absolute;width:.5rem;height:.22rem;box-sizing:border-box;right: .2rem;bottom: .06rem;background-color: rgb(195, 195, 195);border-radius: .02rem;color: rgb(124, 124, 124);text-align: center;font-size: .12rem;line-height: .22rem;border: none;pointer-events: none;",
+
+    		},
+    		methods:{
+    			makeCoffee:function(pram){
+            // console.log(pram1+"  "+pram2);
+            localStorage.theConversionCodeId = pram.id;
+            localStorage.isFromCom = false;
+            localStorage.configId = pram.product.id;
+            //       var self = this;
+            //       reqwest({
+            //           url:localStorage.url+"makeCoffeesByConversionCodeId",
+            //           type:"json",
+            //           method:"post",
+            //           data:{id:pram1,vmc:pram2},
+            //           success:function (resp) {
+            //             if (resp.result == true) {
+            //                 localStorage.makingCoffee = "true";
+            //                 self.toastShow = true;
+            //                 localStorage.intervalflag = setInterval(function () {
+            //                   self.getconversionCodes();
+            //                 }, 5000);
+            //             }
+            //             else {
+            //                 alert("领取失败");
+            //             }
+            //           }
+            //       })
+              window.location.href = "/customConfig";
+          },
+          getconversionCodes:function(){
+            var self = this;
+            reqwest({
+    		  		url:localStorage.url+"getProductConversionCodeByMemberIdAndConversionState",
+    		  		type:"json",
+    		  		method:"get",
+    		  		data:{memberId:localStorage.memberId,conversionState:1},
+    		  		success:function(resp){
+                var theData = resp.data;
+                theData.forEach(function(good){
+                  if (localStorage.makingCoffee == "true" && good.id == localStorage.theConversionCodeId) {
+                      alert("领取成功");
+                      localStorage.makingCoffee = "false";
+                      self.toastShow = false;
+                      clearInterval(localStorage.intervalflag);
+                  }
+                });
+    		  		}
+    		  	});
+            reqwest({
+    		  		url:localStorage.url+"getProductConversionCodeByMemberIdAndConversionState",
+    		  		type:"json",
+    		  		method:"get",
+    		  		data:{memberId:localStorage.memberId,conversionState:3},
+    		  		success:function(resp){
+                var theData = resp.data;
+    		  			theData.forEach(function(good){
+                  if (localStorage.makingCoffee == "true" && good.id == localStorage.theConversionCodeId) {
+                      alert("领取失败");
+                      localStorage.makingCoffee = "false";
+                      self.toastShow = false;
+                      clearInterval(localStorage.intervalflag);
+                  }
+                });
+    		  		}
+              });
+          },
+    		  getProducts:function(){
+    		  	var self = this;
+    		  	reqwest({
+    		  		url:localStorage.url+"getProductConversionCodeByMemberIdAndConversionState",
+    		  		type:"json",
+    		  		method:"get",
+    		  		data:{memberId:localStorage.memberId,conversionState:0},
+    		  		success:function(resp){
+    		  			self.comments = resp.data;
+                if (self.comments) {
+                  self.hasData = true;
+                }
+                else{
+                   self.loadingTest = "暂无数据 去逛逛";
+                   self.hasData = false;
+                }
+    		  		},
+              error:function(){
+                alert("请求超时");
+              }
+    		  	})
+    		  },
+
+    		},
+        ready:function () {
+            this.getProducts();
+            if (localStorage.makingCoffee == "true") {
+              var self = this;
+              self.toastShow = true;
+              localStorage.intervalflag = setInterval(function () {
+                self.getconversionCodes();
+              }, 5000);
+            }
+        }
+    	})
+    </script>
+  </body>
+</html>

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <link rel="stylesheet" href="{% static 'css/shoppingCart.css' %}" media="screen" title="no title" charset="utf-8">
+    <link rel="stylesheet" href="{% static 'css/modal.css' %}" media="screen" title="no title" charset="utf-8">
+    <script type="text/javascript" src="{% static 'js/reqwest.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/jweixin-1.2.0.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/jquery-1.11.3.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/vue1.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'css/weui.min.css' %}">
+    <title>购物车</title>
+  </head>
+  <body ontouchstart="" id="app" v-cloak>
+    <div v-show="hasData">
+      <div class="viewHeader">
+          <h1 class="header">E乐饮下单</h1>
+          <div class="discount" v-on:click="cleanCart">
+          <h4 class="">清空购物车</h4>
+          </div>
+      </div>
+      {% verbatim %}
+      <div class="productView">
+        <div v-for="comment in comments" class="productList">
+          <div class="product">
+              <div class="addImage" v-bind:class="{check:comment.isChecked}" v-on:click="addProductOrNot(comment)">
+              </div>
+              <!--<input id="x1" class="addImage" name="checkbox1" type="checkbox"  value="28.00" onclick="xz('x1','c1')">-->
+              <!--<div pers in permissionsPackageList> </div>-->
+              <!--<div class="addImage"><input class="check-one check" type="checkbox" name="newslist"/></div>-->
+              <div class="avatarView" v-on:click="addProductOrNot(comment)">
+                  <img class="avatar" v-bind:src="comment.product.pictureUrl" alt="" />
+              </div>
+              <div class="content">
+                  <h3  class="author">{{ comment.product.name }}</h3>
+                  <h3  class="price">￥{{ comment.product.price }}</h3>
+
+              </div>
+              <div class="handleView">
+                  <div class="productMinus" v-on:click="productMinus(comment)">
+                      -
+                  </div>
+                  <div class="productNum" >
+                      {{ comment.num }}
+                  </div>
+                  <div class="productAdd" v-on:click="productAdd(comment)">
+                      +
+                  </div>
+              </div>
+
+          </div>
+        </div>
+      </div>
+
+      <div class="viewFooter">
+          <div class="allAddImage" v-bind:class="{check:isSelectAll}" v-on:click="selectAllOrNot()"></div>
+          <!--<button id="jrgwc2" style="width:64px;background-color:#f2f2f2;border: 0px;"  type="button" class="mui-btn mui-btn-primary mui-icon " onclick="quanxuan()" >全选</button>-->
+          <!--<input class="check-all checkAll" type="checkbox" id="jrgwc2"/>全选
+          </div>-->
+          <div class="header count" id="priceTotal">
+            合计：￥{{ allCount }}
+          </div>
+         <div class="payBtn" v-on:click="payCart">
+              去结算<span id="selectedTotal">（{{ allNum }}）</span>
+         </div>
+
+      </div>
+    </div>
+    <div id="notData" style="width: 100%;height: 50%;text-align: center;margin-top:.2rem;" v-show="!hasData">
+      <a href="/index">
+        <span class="context" style="font-size:.2rem;">
+        {{ loadingTest }}
+        </span>
+      </a>
+    </div>
+
+    <div class="md-modal modal-msg md-modal-transition" id="showModal"
+		v-bind:class="{'md-show':confirmDelete}" >
+		<div class="md-modal-inner">
+			<div class="md-top">
+				<button class="md-close" @click="cancelDel">关闭</button>
+			</div>
+			<div class="md-content">
+				<div class="confirm-tips">
+					<p id="cusLanInfo" lan="Cart.Del.Confirm">你确认删除此商品吗?</p>
+				</div>
+				<div class="btn-wrap col-2">
+					<button class="btn btn--m" id="btnModalConfirm" @click="doDel">Yes</button>
+					<button class="btn btn--m btn--red" id="btnModalCancel" @click="cancelDel">No</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="md-overlay" id="showOverLay" v-show="confirmDelete" ></div>
+    {% endverbatim %}
+  </body>
+</html>
+<script type="text/javascript" src="{% static 'js/cart.js' %}"></script>

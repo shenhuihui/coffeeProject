@@ -1,0 +1,45 @@
+@charset "utf-8";
+*{margin:0; padding:0; list-style:none; font-family:'微软雅黑', Arial; font-size:.16rem; text-decoration:none;}
+html{font-size:calc(100vw/3.75);}
+html, body{font-size:calc(100vw/3.75);width:100%; height:100%;-webkit-overflow-scrolling: touch;overflow:auto;overflow-x:hidden;}
+body{background-color:#f0f2f5;}
+[v-cloak] {
+    display: none !important;
+}
+.activityList{
+	padding-bottom:66px;
+}
+.headView{
+	background: #cecece;
+	color: #FFFFFF;
+	border-radius: 6px;
+	width: 1.3rem;
+	height: .2rem;
+	text-align: center;
+	top: .1rem;
+	font-size: .12rem;
+	position: relative;
+	left: 50%;
+	transform: translate(-50%,0);
+}
+.content {
+	position: relative;margin-left: .15rem;margin-top: .3rem;background-color: white;margin-right: .15rem;border-radius: .03rem;
+	height: 0;padding-bottom: 80%;
+}
+.content p {
+	text-align: center;line-height: .5rem;font-weight: bold;font-size: .16rem;
+}
+.content img{
+	top: .63rem;
+	position: absolute;background: url() no-repeat center center;
+	background-size: 100% 100%;left: 50%;transform: translate(-50%,0);width: 94%;height: 60%;
+}
+
+.blackView {
+	width: 94%;height: .48rem;background-color: black;opacity: .7;left: 50%;transform: translate(-50%,0);position: absolute;
+	bottom: .15rem;
+}
+
+.blackView p{
+	color: white;font-size: .18rem;line-height: .48rem;left: .1rem;position: absolute;
+}

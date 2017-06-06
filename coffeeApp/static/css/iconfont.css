@@ -1,0 +1,44 @@
+
+/*************************作者 闫耀辉  iconfont 矢量图标库**************************/
+@font-face {font-family: "iconfont";
+  src: url('../fonts/iconfont.eot'); /* IE9*/
+  src: url('../fonts/iconfont.eot') format('embedded-opentype'), /* IE6-IE8 */
+  url('../fonts/iconfont.woff') format('woff'), /* chrome, firefox */
+  url('../fonts/iconfont.ttf') format('truetype'), /* chrome, firefox, opera, Safari, Android, iOS 4.2+*/
+  url('../fonts/iconfont.svg') format('svg'); /* iOS 4.1- */
+}
+
+.iconfont {
+  font-family:"iconfont" !important;
+  font-size:16px;
+  font-style:normal;
+  -webkit-font-smoothing: antialiased;
+  -webkit-text-stroke-width: 0.2px;
+  -moz-osx-font-smoothing: grayscale;
+}
+.icon-shouye:before { content: "\e61a"; }
+.icon-xinpin:before { content: "\e611"; }
+.icon-xinpin1:before { content: "\e602"; }
+.icon-xinpin2:before { content: "\e623"; }
+.icon-xinpinshangjia:before { content: "\e613"; }
+.icon-gerenzhongxin:before { content: "\e609"; }
+.icon-gerenzhongxin1:before { content: "\e615"; }
+.icon-gerenzhongxin2:before { content: "\e6f9"; }
+.icon-gerenzhongxin3:before { content: "\e64d"; }
+.icon-dianpu:before { content: "\e61b"; }
+.icon-dianpu1:before { content: "\354b"; }
+.icon-dianpu2:before { content: "\e61f"; }
+.icon-dianpu3:before { content: "\e62c"; }
+.icon-qiandao:before { content: "\e689"; }
+.icon-qiandao1:before { content: "\e605"; }
+.icon-qiandao2:before { content: "\e60b"; }
+.icon-choujiang:before { content: "\e62f"; }
+.icon-choujiang01:before { content: "\e605"; }
+.icon-weibiaoti210:before { content: "\e630"; }
+.icon-redbag:before { content: "\e641"; }
+.icon-2:before { content: "\e601"; }
+.icon-hongbao:before { content: "\e6bd"; }
+.icon-hongbao1:before { content: "\e62b"; }
+.icon-gouwuche:before { content: "\e654"; }
+.icon-gouwuche1:before { content: "\e730"; }
+.icon-gouwuche2:before { content: "\e64f"; }

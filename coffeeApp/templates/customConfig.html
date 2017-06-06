@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html>
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <link rel="stylesheet" href="{% static 'css/customConfig.css' %}" media="screen" title="no title" charset="utf-8">
+    <link rel="stylesheet" href="{% static 'css/weui.min.css' %}">
+    <script type="text/javascript" src="{% static 'js/reqwest.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/vue1.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/zepto.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/jweixin-1.2.0.js' %}"></script>
+    <title>个性调配</title>
+  </head>
+  <body id="app" ontouchstart="" v-cloak>
+    {% verbatim %}
+    <div class="content">
+      <div class="part1Header">个性调制</div>
+      <div class="customView">
+        <ul>
+          <li style="height:.5rem;line-height:.5rem;">
+            <div class="weui-slider-box">
+              <div class="sliderName">
+                {{ configContent.coffeeName }}
+              </div>
+            <div class="weui-slider">
+                <div id="sliderInner" class="weui-slider__inner">
+                    <div id="sliderTrack" class="weui-slider__track" v-bind:style="{width:coffeevalue * 20 + '%'}"></div>
+                    <div id="sliderHandler" class="weui-slider__handler" v-bind:style="{left:coffeevalue * 20 + '%'}"></div>
+                </div>
+            </div>
+            <div id="sliderValue" class="weui-slider-box__value">{{ coffeevalue }}</div>
+        </div>
+          </li>
+          <li style="height:.5rem;line-height:.5rem;">
+            <div class="weui-slider-box">
+                <div class="sliderName">
+                  {{ configContent.milkName }}
+                </div>
+                <div class="weui-slider">
+                    <div id="sliderInner2" class="weui-slider__inner">
+                        <div id="sliderTrack2" class="weui-slider__track" v-bind:style="{width:milkValue * 20 + '%'}"></div>
+                        <div id="sliderHandler2" class="weui-slider__handler" v-bind:style="{left:milkValue * 20 + '%'}"></div>
+                    </div>
+                </div>
+                <div id="sliderValue2" class="weui-slider-box__value">{{ milkValue }}</div>
+            </div>
+          </li>
+          <li style="height:.5rem;line-height:.5rem;">
+            <div class="weui-slider-box" style=".5rem;">
+              <div class="sliderName">
+                {{ configContent.sugarName }}
+              </div>
+                <div class="weui-slider">
+                    <div id="sliderInner3" class="weui-slider__inner">
+                        <div id="sliderTrack3" class="weui-slider__track" v-bind:style="{width:sugarValue * 20 + '%'}"></div>
+                        <div id="sliderHandler3" class="weui-slider__handler" v-bind:style="{left:sugarValue * 20 + '%'}"></div>
+                    </div>
+                </div>
+                <div id="sliderValue3" class="weui-slider-box__value">{{ sugarValue }}</div>
+            </div>
+          </li>
+        </ul>
+      </div>
+      <div class="part2Header">系统推荐</div>
+      <div class="systemView" v-for="comment in comments">
+          <div class="addImage" v-bind:class="{check:comment.isChecked}" v-bind:style="{left:comments.indexOf(comment) % 2 * 50 + '%', top:parseInt(comments.indexOf(comment) / 2)  * 0.4 + 'rem'}" v-on:click="addProductOrNot(comment)">{{ comment.name }}</div>
+      </div>
+      <div class="scanBtn" v-on:click="scanCode">扫码取咖啡</div>
+    </div>
+    {% endverbatim %}
+    <!-- loading toast -->
+       <div id="loadingToast" v-show="toastShow">
+           <div class="weui-mask_transparent"></div>
+           <div class="weui-toast">
+               <i class="weui-loading weui-icon_toast"></i>
+               <p class="weui-toast__content">制作咖啡中</p>
+           </div>
+       </div>
+  </body>
+  <script type="text/javascript"  src="{% static 'js/customConfig.js' %}"></script>
+</html>

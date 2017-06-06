@@ -1,0 +1,26 @@
+*{margin:0; padding:0; list-style:none; font-family:'微软雅黑', Arial; font-size:.16rem; text-decoration:none;}
+html{font-size:calc(100vw/3.75);}
+html, body{width:100%; height:100%;overflow-x:hidden;}
+body{background:url(../images/bg-Land.png) center center no-repeat; background-size:100% 100%; overflow:hidden;}
+.login{padding:0 .37rem;}
+.login_inf{margin-top:1rem;}
+.login_inf li{height:.44rem; margin-bottom:.15rem; position:relative;}
+.login_inf li:before{content:''; width:.2rem; height:.2rem; display:block; position:absolute; top:50%; margin-top:-.1rem; left:.1rem;}
+.login_inf li:last-child:before{display:none;}
+/* login表单公用样式 */
+.login_inf .login_user, .login_inf .getCode, .login_inf .login_code, .login_inf .submit{display:block; height:.44rem; line-height:.44rem; border-radius:.09rem; color:#fff; box-sizing:border-box;}
+/* 输入框公用样式 */
+.login_inf input{background:rgba(255,255,255,.6); font-size:.14rem; border:0; outline:none; padding:0 .12rem 0 .4rem;}
+
+/* 用户手机号码 */
+.login_inf .login_user{ width:2rem; float:left;}
+.login_inf li:first-child:before{background:url(../images/icon-userr.png) center center no-repeat; background-size:100% 100%;}
+/* 按钮公用样式 */
+.login_inf .getCode, .login_inf .submit{font-size:.16rem; background:#78b937; text-align:center;}
+/* 验证码样式 */
+.login_inf .getCode{ margin-left:2.1rem; padding:0 .03rem;}
+/* 验证码输入框样式 */
+.login_inf .login_code{width:100%;}
+.login_inf li:nth-child(2):before{background:url(../images/icon-pw.png) center center no-repeat; background-size:100% 100%;}
+/* 登陆按钮 */
+.login_inf .submit{}

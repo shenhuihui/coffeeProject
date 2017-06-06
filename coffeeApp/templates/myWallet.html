@@ -1,0 +1,42 @@
+<!DOCTYPE HTML>
+{% load staticfiles %}
+<html>
+ <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+    <link rel="stylesheet" href="{% static 'css/myWallet.css' %}" media="screen" title="no title" charset="">
+    <script type="text/javascript" src="{% static 'js/vue1.js' %}" ></script>
+    <title>我的E豆</title>
+  </head>
+<body id="app" ontouchstart="" v-cloak>
+  {% verbatim %}
+  <div class="wallet">
+    <img class="avatar" v-if="localStorage.headportraitUrl" v-bind:src="localStorage.headportraitUrl">
+    <img class="avatar" src="../static/images/ic_mine_portrait.png" v-else>
+    <div class="edou">
+      <div class="EImage"></div>
+      <div class="wenzi">{{ eNum }} E豆</div>
+    </div>
+  </div>
+ 	<a href="/recharge/"><div class="recharge" >充值</div></a>
+   <!--<div class="balance">
+   <span>余额58元</span>
+   <span class="yue">[余额转出]</span>
+ </div>-->
+ {% endverbatim %}
+ <script>
+   var vm = new Vue({
+     el:"#app",
+     data:{
+       eNum:localStorage.eNum,
+     },
+     methods:{
+
+     },
+     ready:function () {
+     }
+   });
+ </script>
+</body>
+</html>

@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <link rel="stylesheet" href="{% static 'css/shoppingCart.css' %}" media="screen" title="no title" charset="utf-8">
+    <link rel="stylesheet" href="{% static 'css/weui.min.css' %}" media="screen" title="no title" charset="utf-8">
+    <script type="text/javascript" src="{% static 'js/reqwest.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/vue1.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/jquery-1.11.3.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/jweixin-1.2.0.js' %}"></script>
+    <title>请TA喝</title>
+  </head>
+  <body id="app" ontouchstart="">
+    <div class="viewHeader">
+        <h1 class="header">E乐饮下单</h1>
+        <div class="discount" v-on:click="getTicket">
+        <h4 class="">优惠券</h4>
+        </div>
+    </div>
+    {% verbatim %}
+    <div class="productView">
+      <div v-for="comment in comments" class="productList">
+        <div class="product">
+            <!--<div class="addImage" v-on:click="addProductOrNot(comment)">
+            </div>-->
+            <!--<input id="x1" class="addImage" name="checkbox1" type="checkbox"  value="28.00" onclick="xz('x1','c1')">-->
+            <!--<div pers in permissionsPackageList> </div>-->
+            <div class="addImage"><input type="checkbox" :value="comment.product.id" class="fan-checkbox" v-model='ischeckdate' /></div>
+            <div class="avatarView">
+                <img class="avatar" v-bind:src="comment.product.pictureUrl" alt="" />
+            </div>
+            <div class="content">
+                <h3 href="#" class="author">{{ comment.product.name }}</h3>
+                <h3 href="#" class="author">￥{{ comment.product.price }}</h3>
+
+            </div>
+            <div class="handleView">
+                <div class="productMinus" v-on:click="productMinus(comment)">
+                    -
+                </div>
+                <div class="productNum">
+                    {{ comment.num }}
+                </div>
+                <div class="productAdd" v-on:click="productAdd(comment)">
+                    +
+                </div>
+            </div>
+
+
+        </div>
+      </div>
+    </div>
+
+    <div class="wukeyong">
+       <div class="header">优惠券</div>
+        <div class="discount">无可用<img src="../static/images/iocn_Arrow-2.png"></div>
+    </div>
+     <div class="edou">
+        <div class="header1">E豆(共2000E豆)</div>
+        <div class="discount1">-600<img src="../static/images/iocn_Arrow-2.png"></div>
+    </div>
+     <div class="zonge">
+        <span class="spzonge" >商品总额</span>
+        <span class="price" id="zj">￥{{ modal.allCount }}.00</span>
+        <span class="lijian">立减</span>
+        <span class="jiane">-￥6.00</span>
+    </div>
+    <div class="shifu">
+    <div class="shikuan">实付款<span style="color: red;">￥48.00</span></div>
+    </div>
+
+    <div class="viewFooter">
+        <!--<div class="allAddImage"></div>-->
+        <div class="allAddImage">
+        <!--<button id="jrgwc2" style="width:64px;background-color:#f2f2f2;border: 0px;"  type="button" class="mui-btn mui-btn-primary mui-icon " onclick="quanxuan()" >全选</button>-->
+         <input type="checkbox" class="fan-checkbox" v-model="checkAll" @click="checkedAll()">全选
+        </div>
+        <div class="header count" id="zj">
+          合计：￥{{ modal.allCount }}.00
+        </div>
+        <div class="payBtn" v-on:click="payCart">
+           请TA喝
+        </div>
+    </div>
+    {% endverbatim %}
+    <script>
+    	/*全选与全不选
+    	function quanxuan(){
+    		var a = document.getElementById("jrgwc2");
+				var zj="{{ modal.allCount }}";
+				//a.innerHTML="全不选";
+				//alert(a.innerHTML=="全选");
+				var aa = document.getElementsByName("checkbox1");
+				if(a.innerHTML=="全选"){
+					var request = new XMLHttpRequest();
+					request.onreadystatechange = function(){
+						if(request.readyState==4 && request.status==200){
+							var ret = request.responseText;
+							zj = ret;
+							}
+					}
+					request.open("get" , "${pageContext.request.contextPath }/Car.do?method=quanxuan&x="+Math.random() , false);
+					request.send(null);
+
+					document.getElementById("zj").innerHTML="￥"+zj;
+					a.innerHTML="全不选";
+					for(var i=0;i<=aa.length;i++){
+						//alert(aa[i]);
+						aa[i].checked="checked";
+
+					}
+			    }else{
+			    	document.getElementById("zj").innerHTML="￥0";
+			    	a.innerHTML="全选";
+					for(var i=0;i<=aa.length;i++){
+						//alert(aa[i]);
+						aa[i].checked="";
+
+					}
+				}
+
+    	}*/
+
+    </script>
+
+
+    <script>
+          var vm = new Vue({
+              el:"#app",
+              watch:{
+								 'ischeckdate':function(){
+								   console.log(this.ischeckdate.toString());
+								   if(this.comments.length===this.ischeckdate.length){
+								     this.checkAll=true;
+								   }else{
+								     this.checkAll=false;
+								   }
+								 },
+								 checkAll(yes) {
+								   this.checkAll = yes;
+								 }
+								},
+              data() {
+							   return {
+							     comments:[
+							       {id:108,name:"BD",price:"28.00"},
+
+							     ],
+							     ischeckdate:[],//获取选项框数据
+							     checkAll: false,//全选
+							   }
+							 },
+
+
+              data:{
+                  modal:{
+                      allNum:0,
+                      allCount:0,
+                      /*jiane:0,*/
+                  },
+                  comments:[
+                      // {
+                      //   product:{
+                      //       name:"咖啡",
+                      //       price:"15",
+                      //   },
+                      //   num:1,
+                      // },
+                  ]
+              },
+              methods:{
+
+              	checkedAll: function() {
+								     let ischeckdate = [];
+								     if (!this.checkAll) {
+								       this.comments.forEach((comment) => {
+								         ischeckdate.push(comment.product.id);
+								       });
+								     }
+								     this.ischeckdate = ischeckdate;
+								     console.log("aa-----"+this.ischeckdate.toString());
+								   },
+
+              	   getTicket:function(){
+                  reqwest({
+                      url:"http://mkcaffee.chinaeast.cloudapp.chinacloudapi.cn/api/coffees/"+"getConfigInfo",
+                      type:"json",
+                      method:"get",
+                      data:{url:window.location.href},
+                      success:function (resp) {
+                        wx.config({
+                          debug: true,
+                          appId: resp.data.appId,
+                          timestamp: resp.data.timestamp,
+                          nonceStr: resp.data.nonceStr,
+                          signature: resp.data.signature,
+                          jsApiList: [
+                              "chooseCard"
+                            ]
+                        });
+                        wx.ready(function() {
+                          console.log("配置成功");
+                          reqwest({
+                              url:"http://mkcaffee.chinaeast.cloudapp.chinacloudapi.cn/api/coffees/mp/"+"getWxCardApiSignature",
+                              type:"json",
+                              method:"get",
+                              success:function (resp) {
+                                wx.chooseCard({
+                                  timestamp: resp.data.timestamp, // 卡券签名时间戳
+                                  nonceStr: resp.data.nonceStr, // 卡券签名随机串
+                                  signType: 'SHA1', // 签名方式，默认'SHA1'
+                                  cardSign: resp.data.signature, // 卡券签名
+                                  success: function (res) {
+                                    var cardList= res.cardList; // 用户选中的卡券列表信息
+                                    console.log("卡券列表："+res.errMsg);
+                                    for (var variable in cardList) {
+                                      console.log("卡券："+variable);
+                                    }
+                                  }
+                                });
+                              }
+                            });
+                        });
+                        wx.error(function(res){
+                            alert(res.errMsg);
+                        });
+                      }
+                  })
+                },
+
+                productMinus:function(comment){
+                      this.modal.allNum--;
+                      this.modal.allCount-=comment.product.price;
+                      comment.num--;
+                      if (comment.num==0) {
+                        this.comments.splice(this.comments.indexOf(comment), 1);
+                      }
+                      var resquesturl = localStorage.url+"addShoppingCart/";
+                      resquesturl+=localStorage.memberId;
+                      resquesturl+="/";
+                      resquesturl+=comment.product.id;
+                      reqwest({
+                          url:resquesturl,
+                          type:"json",
+                          method:"post",
+                          data:{num:-1},
+                          success:function (resp) {
+                          }
+                      })
+                },
+                productAdd:function(comment){
+                    this.modal.allNum++;
+                    this.modal.allCount+=comment.product.price;
+                    comment.num++;
+                    var resquesturl = localStorage.url+"addShoppingCart/";
+                    resquesturl+=localStorage.memberId;
+                    resquesturl+="/";
+                    resquesturl+=comment.product.id;
+                    reqwest({
+                        url:resquesturl,
+                        type:"json",
+                        method:"post",
+                        data:{num:1},
+                        success:function (resp) {
+                        }
+                    })
+                },
+                addProductOrNot:function (product){
+                    // alert(product.name);
+
+                },
+                payCart:function(){
+                  var self = this;
+                  console.log(localStorage.memberId);
+                  reqwest({
+                      url:localStorage.url+"order",
+                      type:"json",
+                      contentType: "application/json",
+                      method:"post",
+                      data: JSON.stringify({ 'memberId': localStorage.memberId}),
+                      success:function (resp) {
+                        window.location.href = "/";
+                      }
+                  })
+                },
+
+
+
+                /*getjianeshu:function(){
+                	var self = this;
+                	var resquesturl = localStorage.url+"getWXCardInfo/";
+                	resquesturl += localStorage.memberId;
+                	reqwest({
+                		url:resquesturl,
+                		type:"json",
+                		method:"get",
+                		success:function(resp){
+                			self.coments = resp.data;
+                			if(self.coments.cardType=="cash")
+                			jiane=allCount-discount;
+                		}
+                		else if(self.comments.cardType=="discount"){
+                			jiane=allCount%reduceCost;
+                		}
+
+                	})
+
+
+                },*/
+
+                  getData:function () {
+                      var self = this;
+                      var resquesturl = localStorage.url+"shoppingCart/";
+                      resquesturl+=localStorage.memberId;
+                      reqwest({
+                          url:resquesturl,
+                          type:"json",
+                          method:"get",
+                        //  data:{tag:"life"}
+                          success:function (resp) {
+                              self.comments = resp.data;
+                              if (self.comments) {
+                                for (var i = 0; i < self.comments.length; i++) {
+                                    self.modal.allNum += self.comments[i].num;
+                                    self.modal.allCount += self.comments[i].product.price * self.comments[i].num;
+                                }
+                              }
+                              else{
+                              	var url = window.location.href;
+                                window.location.href = url.substring(0,url.length-5)+"direct";
+                              }
+                          }
+                      })
+                  }
+              },
+              ready:function () {
+                  this.getData()
+              }
+          });
+      </script>
+  </body>
+</html>

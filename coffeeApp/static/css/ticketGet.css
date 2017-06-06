@@ -1,0 +1,106 @@
+*{margin:0; padding:0; list-style:none; font-family:'΢���ź�', Arial; font-size:.16rem; text-decoration:none;}
+html, body{font-size:calc(100vw/3.75);width:100%; height:100%;overflow-x:hidden;}
+body{background-color:#f1f1f1;}
+.productView {
+  position: relative;padding-bottom:66px;
+}
+.product {
+  width:100%;margin-top:.05rem;background-color: #f1f1f1;position: relative;
+}
+.head {
+    height: auto;
+    position: relative;
+    text-align: center;
+    top: 0rem;
+}
+.head img {
+    width: 90%;
+    height: 50%;
+}
+.content {
+    height: auto;
+    position: relative;
+    text-align: center;
+    top: 0.06rem;
+}
+.content img {
+    width: 20%;
+    height: 10%;
+    border-radius: 50%;
+    margin-top: -0.98rem;
+}
+.user{
+	position: absolute;
+    width: 3.0rem;
+    left: 0.4rem;
+    height: .54rem;
+    top: 3.95rem;
+    text-align: center;
+    font-size: .18rem;
+    color: #6d6d6d;
+    margin: auto;
+}
+.coffee {
+	position: absolute;
+    width: 3.0rem;
+    left: 0.4rem;
+    height: .54rem;
+    top: 4.35rem;
+    text-align: center;
+    font-size: .15rem;
+    color: #6d6d6d;
+    margin: auto;
+}
+.phone {
+    position: absolute;
+    width: 2.65rem;
+    left: 0.5rem;
+    height: .40rem;
+    top: 4.75rem;
+    text-align: center;
+    line-height: .42rem;
+   
+    background: #ffffff;
+   
+    border: 2px solid #e2e2e2;
+    border-radius:8px;
+    margin: auto;
+}
+.phone input{
+	width: 2.45rem;
+	border: none;
+	font-size: .18rem;
+	color:#8a8a8a;
+	text-align: center;
+	height: .40rem;
+}
+
+.get{
+	position: absolute;
+    width: 2.65rem;
+    left: 0.5rem;
+    height: .40rem;
+    top: 5.3rem;
+    text-align: center;
+    line-height: .42rem;
+    font-size: .18rem;
+    background: #78b937;
+    color:#ffffff;
+    border: 2px solid #e2e2e2;
+    border-radius:8px;
+    margin: auto;
+	
+}
+#rule{
+	
+	position: absolute;
+    width: 2.65rem;
+    left: 0.5rem;
+    height: .40rem;
+    top: 5.75rem;
+    text-align: center;
+    line-height: .42rem;
+    font-size: .14rem;    
+    margin: auto;
+   
+}

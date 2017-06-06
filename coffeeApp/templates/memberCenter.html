@@ -1,0 +1,272 @@
+<!DOCTYPE HTML>
+{% load staticfiles %}
+<html style="">
+<head>
+<title>会员中心</title>
+<meta charset="utf-8">
+<meta name="" content="utf-8">
+<link rel="stylesheet" href="{% static 'css/memberCenter.css' %}">
+<link rel="stylesheet" href="{% static 'css/weui.min.css' %}">
+<script type="text/javascript" src="{% static 'js/vue1.js' %}" ></script>
+<script type="text/javascript" src="{% static 'js/reqwest.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/jweixin-1.2.0.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/jquery-1.11.3.min.js' %}"></script>
+</head>
+<body id="app" ontouchstart="" v-cloak>
+{% verbatim %}
+<div class="wholeView">
+<div class="my-info"><!--背景绿色部分-->
+<header class="ptm-bar">
+    <a href="#">设置</a><a href="#"><img src="../static/images/iocn-news.png"></a>
+</header>
+
+
+   <!--<img src="../static/images/logo_03.png">
+   <h1>用户名</h1> -->
+   <img class="avatar" v-if="member.headportraitUrl" v-bind:src="member.headportraitUrl">
+   <img class="avatar" v-on:click="gotoRegist" src="../static/images/ic_mine_portrait.png" v-else>
+   <h1 style="color: white;" v-if="member.isRegist">{{ member.name }}</h1>
+   <h1 style="color: white;" v-on:click="gotoRegist" v-else>注册</h1>
+
+
+
+   <!--<div class="handleView" >
+       <span class="grade">会员等级</span>
+   </div>-->
+
+</div><!--背景绿色部分-->
+
+<div class="order block">
+    <a class="block-item" href="/testPay/">
+        <img src="../static/images/iocn-payment.png">
+        <span class="miaoshu">待付款</span>
+    </a>
+    <a class="block-item" href="/notDraw">
+        <img src="../static/images/iocn-Receive.png">
+        <span class="miaoshu">待领取</span>
+    </a>
+    <a class="block-item">
+        <img src="../static/images/iocn-evaluate.png">
+        <span class="miaoshu">暂无
+          <div class="evaluate">
+            <span class="evaluateshu" style="position: absolute;width:2rem; height: 1rem;margin-top: 1rem;right: 28.5rem;display:inline-block;font-size: 25px;">3</span>
+        </div>
+        </span>
+    </a>
+    <a class="block-item" href="/giveCoffee">
+        <img src="../static/images/iocn-drink.png">
+        <span class="miaoshu">请TA喝
+          <div class="evaluate">
+         <span class="weui-badge" style="position: absolute;width:1.2%; height: 1.2%; top:17.5rem;right: 28.5rem;font-size: 25px;">3
+         </span>
+        </div>
+        </span>
+    </a>
+    <a class="block-item zhexian" href="/myOrder1">
+        <img src="../static/images/iocn-Order.png">
+        <span class="miaoshu">已付款</span>
+    </a>
+</div>
+<div class="order block">
+    <a class="block-item" href="/myWallet">
+        <font style="font-size:.16rem;">{{ eNum }}</font>
+        <span class="miaoshu">我的E豆</span>
+    </a>
+    <!--<a class="block-item" href="javascript:void(0)/m/order/list?status=2">
+        <font>13</font>
+        <span>优惠券</span>
+    </a>-->
+
+     <div class="block-item" v-on:click="openTicket">
+      <font style="font-size:.16rem;">{{ ticketNum }}</font>
+      <span class="miaoshu">优惠券</span>
+     </div>
+
+    <a class="block-item" href="javascript:void(0)/m/order/list?status=3">
+        <img src="../static/images/iocn-bean-h.png">
+        <span class="miaoshu">领E豆</span>
+    </a>
+    <a class="block-item" id="showIOSDialog1">
+        <img src="../static/images/iocn-Receive.png">
+        <span class="miaoshu" style="font-size:14px;line-height:25px;">企业领咖啡</span>
+    </a>
+    <a class="block-item zhexian" href="/myWallet">
+        <img src="../static/images/iocn-wallet.png">
+        <span class="miaoshu">我的钱包</span>
+    </a>
+</div>
+<div class="advertisement"></div>
+</div>
+{% endverbatim %}
+<script type="text/javascript" src="{% static 'js/bottom.js' %}"></script>
+<div class="js_dialog" id="iosDialog1" style="display: none;">
+            <div class="weui-mask"></div>
+            <div class="weui-dialog">
+                <div class="weui-dialog__hd"><strong class="weui-dialog__title">请输入密码</strong></div>
+                <div class="weui-dialog__bd">
+                  <input type="text" name="" value="" placeholder="企业账号密码" id="dialogInput" autofocus="autofocus">
+                </div>
+                <div class="weui-dialog__ft">
+                    <a href="javascript:;" class="weui-dialog__btn weui-dialog__btn_default">取消</a>
+                    <a href="javascript:;" class="weui-dialog__btn weui-dialog__btn_primary">确定</a>
+                </div>
+            </div>
+        </div>
+</body>
+<script type="text/javascript">
+$(function(){
+      var $iosDialog1 = $('#iosDialog1');
+      $iosDialog1.on('click', '.weui-dialog__btn_default', function(){
+            $iosDialog1.fadeOut(200);
+      });
+      $iosDialog1.on('click', '.weui-dialog__btn_primary', function(){
+            $iosDialog1.fadeOut(200);
+            if ($('#dialogInput').val() == "mk123456") {
+              window.location.href = "/comDrinkCoffee";
+            }
+            else {
+              alert("密码错误");
+            }
+      });
+      $('#showIOSDialog1').on('click', function(){
+          $iosDialog1.fadeIn(200);
+      });
+  });
+</script>
+<script>
+var code = "{{ queryset }}";
+	/*得到会员资料*/
+  var vm = new Vue({
+  	el:"#app",
+  	data:{
+  		comments:[],
+  		member:{},
+      eNum:0,
+      ticketNum:0,
+      ticketList:[],
+  	},
+  	methods:{
+      wxconfig:function(){
+        reqwest({
+            url:localStorage.url+"getConfigInfo",
+            type:"json",
+            method:"get",
+            data:{url:window.location.href},
+            success:function (resp) {
+              wx.config({
+                debug: false,
+                appId: resp.data.appId,
+                timestamp: resp.data.timestamp,
+                nonceStr: resp.data.nonceStr,
+                signature: resp.data.signature,
+                jsApiList: [
+                    'openCard'
+                  ]
+              });
+              wx.error(function(res){
+                  alert(res.errMsg);
+              });
+            }
+          });
+      },
+      gotoRegist:function(){
+        if (localStorage.isRegist == "false") {
+          window.location.href = "/register";
+        }
+      },
+  		  openTicket:function(){
+          var self = this;
+          if (self.ticketList.length == 0) {
+            alert("您暂无可用优惠券");
+            return;
+          }
+          wx.openCard({
+            cardList: self.ticketList
+          });
+        },
+        getTicket:function(){
+          var self = this;
+          reqwest({
+              url:localStorage.url+"getCardList",
+              type:'json',
+              method:'get',
+              data:{memberId:localStorage.memberId},
+              success:function (resp) {
+                console.log(resp.data);
+                  resp.data.forEach(function(good){
+                    self.ticketList.push({cardId: good.cardId, code: good.code});
+                  });
+                  self.ticketNum = self.ticketList.length;
+              },
+              error:function(){
+                alert("请求超时");
+              }
+            });
+        },
+        getMember:function(){
+  		var self = this;
+  		reqwest({
+  			url:localStorage.url+"member/"+localStorage.memberId,
+  			type:"json",
+  			memthod:"get",
+//			data:{memberId:localStorage.memberId},
+  			success:function(resp){
+          if (resp.result == false) {
+           alert(resp.message);
+           return;
+         }
+  				self.member = resp.data;
+          localStorage.openId = self.member.openId;
+          localStorage.headportraitUrl = self.member.headportraitUrl;
+          localStorage.isRegist = self.member.isRegist;
+          localStorage.isTest = self.member.isTest;
+          if (self.member.ebean) {
+            self.eNum = self.member.ebean.totalNum;
+          }
+          else {
+            self.eNum = 0;
+          }
+          localStorage.eNum = self.eNum;
+  			},
+        error:function(){
+          alert("请求超时");
+        }
+  		})
+    },
+    getmemberId:function () {
+      var self = this;
+      reqwest({
+          url:localStorage.url + "loginByCode",
+          type:"json",
+          method:"post",
+          data:{code:"{{ queryset }}"},
+          success:function (resp) {
+            if (resp.result == true) {
+              localStorage.removeItem("memberId");
+              localStorage.memberId = String(resp.data.memberId);
+            }
+            self.getMember();
+            self.getTicket();
+          },
+          error:function(){
+            alert("请求超时");
+          }
+      })
+    },
+
+  	},
+
+  	ready:function () {
+      this.wxconfig();
+      if (code.length > 4) {
+          this.getmemberId();
+      }
+      else {
+        this.getMember();
+        this.getTicket();
+      }
+    }
+  });
+</script>
+
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <link rel="stylesheet" href="{% static 'css/cart.css' %}" media="screen" title="no title" charset="utf-8">
+    <script type="text/javascript" src="{% static 'js/reqwest.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/jweixin-1.2.0.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/jquery-1.11.3.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/vue1.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'css/weui.min.css' %}">
+    <title></title>
+  </head>
+  <body ontouchstart="" id="app" v-cloak>
+    {% verbatim %}
+    <div class="pruductView">
+      <div v-for="comment in comments" class="productList">
+        <div class="product">
+          <div class="avatarView">
+              <img class="avatar" v-bind:src="comment.product.pictureUrl" alt="" />
+          </div>
+          <div class="content">
+              <p>{{ comment.product.name }}<span style="position:absolute;right:1rem;">￥{{ comment.product.price }}</span><span style="position:absolute;right:.2rem;">{{ comment.num }}杯</span></p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="footerView">
+      <div class="wukeyong" v-on:click="getTicket">
+         <div class="header">优惠券</div>
+         <div class="discount">{{ ticket.title }}<img src="../static/images/iocn_Arrow-2.png"></div>
+      </div>
+       <div class="edou" id="showIOSDialog1">
+          <div class="header1">E豆(使用{{ eNum }} E豆)</div>
+          <div class="discount1"><img src="../static/images/iocn_Arrow-2.png"></div>
+      </div>
+       <div class="zonge">
+          <span class="spzonge" >商品总额</span>
+          <span class="price1" >￥{{ allCount }}</span>
+          <span class="lijian">立减</span>
+          <span class="jiane">-￥{{ reduceCount }}</span>
+      </div>
+      <div class="shifu">
+      <div class="shikuan">实付款<span style="color: red;">￥{{ actualCount }}</span></div>
+      </div>
+      <div class="payBtn" v-on:click="payCart">支付</div>
+    </div>
+
+    <div class="js_dialog" id="iosDialog1" style="display: none;">
+                <div class="weui-mask"></div>
+                <div class="weui-dialog">
+                    <div class="weui-dialog__hd"><strong class="weui-dialog__title">使用E豆</strong></div>
+                    <div class="weui-dialog__bd">可使用E豆{{ totalENum }}，本次可用{{ canUseENum }}</div>
+                    <div class="weui-dialog__bd">
+                      <input type="text" name="" value="" id="dialogInput" placeholder="使用E豆数量">
+                    </div>
+                    <div class="weui-dialog__ft">
+                        <a href="javascript:;" class="weui-dialog__btn weui-dialog__btn_default">取消</a>
+                        <a href="javascript:;" class="weui-dialog__btn weui-dialog__btn_primary">确定</a>
+                    </div>
+                </div>
+            </div>
+    {% endverbatim %}
+  </body>
+  <script type="text/javascript" src="{% static 'js/payCart.js' %}"></script>
+</html>

@@ -1,0 +1,36 @@
+*{margin:0; padding:0; list-style:none; font-family:'微软雅黑', Arial; font-size:.16rem; text-decoration:none;}
+html{font-size:calc(100vw/3.75);}
+html, body{font-size:calc(100vw/3.75);width:100%; height:100%;overflow:auto;overflow-x:hidden;position: relative;-webkit-overflow-scrolling: touch;}
+.content {
+  padding: .1rem .1rem;position: relative;
+}
+.part1Header {
+  line-height: .5rem;height: .5rem;
+}
+.customView {
+  background-color: rgb(242, 242, 242);border-radius: .08rem;height: 1.5rem;padding: .08rem;
+}
+.customView .sliderName {
+  min-width: .6rem;text-align: center;font-size: .15rem;
+}
+.part2Header {
+  line-height: .5rem;height: .5rem;
+}
+.systemView {
+  position: relative;height: auto;
+}
+.addImage {
+width: 50%;height: .4rem;text-align: center;line-height: .4rem;position: absolute;
+background:url(../images/iocn-Check-s.png) 15% no-repeat; background-size: .22rem .22rem;
+}
+.addImage.check {
+  width: 50%;height: .4rem;text-align: center;line-height: .4rem;position: absolute;
+  background:url(../images/iocn-Check-h.png) 15% no-repeat; background-size: .22rem .22rem;
+}
+.scanBtn {
+  margin: 0 auto;width: 2rem;height: .35rem;line-height: .35rem;text-align: center;border-width: .01rem;border-color: grey;
+  border-style: solid;position: relative;margin-top: 60%;
+}
+[v-cloak] {
+    display: none !important;
+}

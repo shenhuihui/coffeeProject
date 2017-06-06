@@ -1,0 +1,79 @@
+ <!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <link rel="stylesheet" href="../ static/css/weui.min.css" media="screen" title="no title" charset="utf-8">
+    <link rel="stylesheet" href="../static/css/login_custom.css" media="screen" title="no title" charset="utf-8">
+    <title>E乐饮咖啡制作</title>
+    <script type="text/javascript" src="../static/js/jquery-1.11.3.js"></script>
+  </head>
+  <body>
+    <article class="login">
+      <ul class="login_inf">
+          <li><input type="user" value="手机号码" class="login_user"/><a  href="javascript:void(0)" onclick="getMsg();" class="getCode">获取验证码</a></li>
+          <li><input type="text" value="请输入验证码" class="login_code"/></li>
+          <li><a href="javascript:void(0)" onclick="login()" class="submit">登录</a></li>
+      </ul>
+  </article>
+  </body>
+</html>
+<script>
+$(function(){
+    var value1 = $('.login_user').val(),
+    value2 = $('.login_code').val();
+    $('input').click(function(event) {
+        if(($(this).val()==value1)||($(this).val()==value2))
+            $(this).val('');
+        $(this).blur(function(event) {
+            if(!$(this).val()){
+                if($(this).hasClass('login_user')){
+                    $(this).val(value1);
+                }else{
+                    $(this).val(value2);
+                }
+            }
+        })
+    });
+});
+function getMsg(){
+	var phoneNum = $('.login_user').val();
+	alert();
+	$.ajax({
+	   type: "POST",//请求方式
+	   url: "http://mkcaffee.chinaeast.cloudapp.chinacloudapi.cn/api/coffees/verificationCode/"+phoneNum,//地址
+	   data: "json",//数据类型text xml json  script  jsonp
+	   success: function(msg){//返回的参数就是 action里面所有的有get和set方法的参数
+		if(msg.result==true){
+			alert("获取验证码成功");
+		}else{
+			alert(msg.message);
+		}
+	   }
+	});
+
+}
+function login(){
+	var phoneNum = $('.login_user').val();
+	var code = $('.login_code').val();
+	alert();
+	$.ajax({
+	   type: "POST",//请求方式
+	   url: "http://mkcaffee.chinaeast.cloudapp.chinacloudapi.cn/api/coffees/login?phone="+phoneNum+"&code="+code,//地址
+	   data: "json",//数据类型text xml json  script  jsonp
+	   success: function(msg){//返回的参数就是 action里面所有的有get和set方法的参数
+		alert(msg.result);
+		if(msg.result==true){
+			alert("登录成功");
+		}else{
+			alert(msg.message);
+		}
+	   }
+	});
+
+}
+
+
+</script>

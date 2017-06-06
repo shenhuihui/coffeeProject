@@ -1,0 +1,168 @@
+@charset "utf-8";
+/* reset.css */
+html{font-size:calc(100vw/3.75);}
+html, body{width:100%; height:100%;position: relative;-webkit-overflow-scrolling: touch;overflow:auto;overflow-x:hidden;}
+body{background-color:rgb(248, 248, 248);}
+div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, form, fieldset, legend, input, button, textarea, p, blockquote, th, td, i {
+margin: 0;
+padding: 0;
+box-sizing: border-box;
+}
+[v-cloak] {
+    display: none !important;
+}
+*{margin:0; padding:0; list-style:none; font-family:'微软雅黑', Arial; font-size:.16rem; text-decoration:none;}
+.ptm-bar {
+    width: 100%;
+    height: 22px;
+    position: absolute;
+}
+.ptm-bar a {
+    width: 50%;
+    height: 100%;
+    display: inline-block;
+    color: #fff;
+    text-align: left;
+    line-height: 53px;
+    float: left;
+    font-size: 20px;
+    text-indent: 31px;
+}
+.ptm-bar a img{
+    width: 40px;
+    height: 40px;
+    float: right;
+    margin-right: 28px;
+    margin-top: 8px;
+}
+header, footer, section, article, aside, nav, address, figure, figcaption, menu, details {
+    display: block;
+}
+
+.ptm-content {
+    /*-webkit-overflow-scrolling: touch;*/
+}
+h1, h2, h3, h4, h5, h6, div, dl, dt, dd, ul, ol, li, p, blockquote, pre, hr, figure, table, caption, th, td, form, fieldset, legend, input, button, textarea, menu {
+    margin: auto;
+    padding: 0%;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    /*-webkit-user-select: none;*/
+    -webkit-tap-highlight-color: transparent;
+    outline: 0;
+}
+.avatar {
+  border-radius: 50%;
+}
+.my-info {
+    width: 100%;
+    bottom: 0;
+    text-align: center;
+    vertical-align: middle;
+    background:url(../images/iocn-bottom.png);
+    position: relative;
+    height: 200px;
+}
+.my-info img {
+    width: 100px;
+    height: 100px;
+    margin-top: 30px;
+}
+fieldset, img, iframe, abbr {
+    border: 0;
+}
+.my-info h1 {
+    height: 48px;
+    color: #fff;
+    font-size: 18px;
+    font-weight: normal;
+    line-height: 55px;
+}
+.handleView {
+    width: 300px;
+    height: 25px;
+    background: #fff;
+    color: #0f0000;
+    border-radius: 20px;
+    line-height: 15px;
+    text-align: left;
+    text-indent: 6px;
+    margin-top: -5px;
+    font-size: 35px;
+
+}
+
+.block {
+    background:url(../images/iocn-frame.png);
+    height:1rem;
+    margin-bottom: 20px;
+}
+
+.block-item{
+    width: 20%;
+	height: 1rem;
+    text-align: center;
+    display: inline-block;
+    color: #666;
+    float: left;
+    font-size: .16rem;
+}
+
+.order .block-item img, .order .block-item font{
+    width: 0.3rem;
+    height:0.3rem;
+    display: block;
+    margin: 0 auto;
+    margin-top: 28px;
+    font-size: 24px;
+}
+.order .miaoshu{
+	width: 0.7rem;
+    height:0.3rem;
+    display: block;
+    margin: 0 auto;
+    margin-top: .8px;
+}
+
+.order .block-item font{
+    font-size: 24px;
+}
+.block .zhexian{
+    background: url(../images/iocn-Line.png) no-repeat;
+    background-size: 0.1rem 1rem;
+}
+.wholeView {
+  padding-bottom: 66px;
+}
+.advertisement {
+    background: url(../images/pic-Advertisement.png) no-repeat center center;
+    background-size: 100% 100%;
+    width: 100%;
+    height: 135px;
+}
+.block-item .evaluate .evaluateshu{
+	display: inline-block;
+    padding: .15em .4em;
+    min-width: 8px;
+    border-radius: 18px;
+    background-color: #f43530;
+    color: #fff;
+    line-height: 1.2rem;
+    text-align: center;
+    font-size: 25px;
+    vertical-align: middle;
+   margin-top: 1rem;
+}
+
+#goodcover {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height:100%;
+	background-color: black;
+	z-index: 1001;
+	-moz-opacity: 0.8;
+	opacity: 0.50;
+	filter: alpha(opacity=80);
+}

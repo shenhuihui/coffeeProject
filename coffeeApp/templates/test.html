@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <link rel="stylesheet" href="{% static 'css/drinkCoffee.css' %}" media="screen" title="no title" charset="utf-8">
+    <link rel="stylesheet" href="{% static 'css/drinkCoffee.css' %}" media="screen" title="no title" charset="utf-8">
+    <link rel="stylesheet" href="{% static 'css/weui.min.css' %}">
+    <script type="text/javascript" src="{% static 'js/reqwest.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/vue1.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/jquery-1.11.3.min.js' %}"></script>
+    <title>E乐饮</title>
+  </head>
+  <body id="app" ontouchstart="">
+    {% verbatim %}
+    <ul class="viewHeader">
+      <li class="">
+        <div class="weui-searchBar-bar" id="searchBar">
+            <form class="weui-search-bar__form">
+                <div class="weui-search-bar__box">
+                    <i class="weui-icon-search"></i>
+                    <input type="search" class="weui-search-bar__input" id="searchInput" placeholder="搜索" required/>
+                    <a href="javascript:" class="weui-icon-clear" id="searchClear"></a>
+                </div>
+            </form>
+        </div>
+        <a href="/cart/">
+          <div class="shopping">
+            <span class="weui-badge" style="position: absolute;top: 20px;right: 1px;display:inline-block;">{{ shoppingCartNum }}</span>
+          </div>
+        </a>
+      </li>
+      <li>
+          <div class="advertisement"></div>
+      </li>
+      <li>
+        <div class="selectButtons">
+          <div v-on:click="orderList" class="button default" v-bind:style="buttonColor.obj0.style">默认</div>
+          <div class="dividerLine1"></div>
+          <div v-on:click="orderList" class="button sale" v-bind:style="buttonColor.obj1.style">销量</div>
+          <div class="dividerLine2"></div>
+          <div v-on:click="orderList" class="button newProduct" v-bind:style="buttonColor.obj2.style">新品</div>
+          <div class="dividerLine3"></div>
+          <div v-on:click="orderList" class="button price" v-bind:style="buttonColor.obj3.style">价格</div>
+          <div class="dividerLine4"></div>
+          <div class="button list"></div>
+        </div>
+      </li>
+    </ul>
+    <div id="showToast" style="position: relative;padding-bottom:66px;">
+      <div v-for="comment in comments" class="productList">
+          <div class="product" v-on:click="addProduct(comment)">
+              <div class="avatarView">
+                  <img class="avatar" v-bind:src="comment.pictureUrl" alt="" />
+              </div>
+              <div class="content">
+                  <p style="text-overflow: ellipsis;overflow: hidden;white-space: nowrap;">{{ comment.name }}</p>
+                  <p style="font-size:.13rem;color:#989898">{{ comment.summary }}</p>
+                  <p>￥{{ comment.price }}.00</p>
+                  <p style="font-size:.13rem;margin-top:.18rem;">
+                       销量：{{ comment.sales }}件
+                  </p>
+              </div>
+              <div class="addImage"></div>
+          </div>
+      </div>
+      {% endverbatim %}
+    </div>
+    <!--BEGIN toast-->
+    <div id="toast" style="display: none;">
+        <div class="weui-mask_transparent"></div>
+        <div class="weui-toast">
+            <i class="weui-icon-success-no-circle weui-icon_toast"></i>
+            <p class="weui-toast__content">已加入购物车！</p>
+        </div>
+    </div>
+      <script>
+            localStorage.memberId = "108";
+            var code = "{{ queryset }}";
+            localStorage.url = "http://mkcaffee.chinaeast.cloudapp.chinacloudapi.cn/api/coffees/";
+            var badgeView = document.querySelector(".weui-badge");
+            var productArr = new Array();
+            var vm = new Vue({
+                el:"#app",
+                data:{
+                    shoppingCartNum:0,
+                    comments:[
+                    ],
+                    buttonStyle1:"color:red",
+                    buttonStyle2:"color:#656565",
+                    buttonColor:{
+                      obj0:{style:"color:red"},
+                      obj1:{style:"color:#656565",state:false},
+                      obj2:{style:"color:#656565",state:false},
+                      obj3:{style:"color:#656565",state:false},
+                    },
+                },
+                methods:{
+                  getShoppingCartNum:function () {
+                    var self = this;
+                    if (self.shoppingCartNum == 0) {
+                        badgeView.style.cssText = "display:none";
+                    }
+                    reqwest({
+                        url:localStorage.url + "shoppingCartProductCount",
+                        type:"json",
+                        method:"get",
+                        data:{memberId:localStorage.memberId},
+                        success:function (resp) {
+                          if (resp.data) {
+                            self.shoppingCartNum = resp.data;
+                            if (self.shoppingCartNum == 0) {
+                                badgeView.style.cssText = "display:none";
+                            }
+                            else {
+                                badgeView.style.cssText = "position: absolute;top: 20px;right: 1px;display:inline-block;";
+                            }
+                          }
+                        }
+                    })
+                  },
+                  orderList:function (event) {
+                      var self = this;
+                      if (event.target.className == "button default") {
+                        self.buttonColor.obj0.style = self.buttonStyle1;
+                        self.buttonColor.obj1.style = self.buttonStyle2;
+                        self.buttonColor.obj2.style = self.buttonStyle2;
+                        self.buttonColor.obj3.style = self.buttonStyle2;
+                          self.getData();
+                      }
+                      else if (event.target.className == "button sale") {
+                          self.buttonColor.obj1.style = self.buttonStyle1;
+                          self.buttonColor.obj0.style = self.buttonStyle2;
+                          self.buttonColor.obj2.style = self.buttonStyle2;
+                          self.buttonColor.obj3.style = self.buttonStyle2;
+                          if (self.buttonColor.obj1.state == false) {
+                              self.buttonColor.obj1.state = true;
+                              self.getDataByOrder("sales","DESC");
+                          }
+                          else {
+                            self.buttonColor.obj1.state = false;
+                            self.getDataByOrder("sales","ASC");
+                          }
+                      }
+                      else if (event.target.className == "button newProduct") {
+                        self.buttonColor.obj2.style = self.buttonStyle1;
+                        self.buttonColor.obj0.style = self.buttonStyle2;
+                        self.buttonColor.obj1.style = self.buttonStyle2;
+                        self.buttonColor.obj3.style = self.buttonStyle2;
+                        if (self.buttonColor.obj2.state == false) {
+                            self.buttonColor.obj2.state = true;
+                            self.getDataByOrder("create_date","DESC");
+                        }
+                        else {
+                          self.buttonColor.obj2.state = false;
+                          self.getDataByOrder("create_date","ASC");
+                        }
+                      }
+                      else if (event.target.className == "button price") {
+                        self.buttonColor.obj3.style = self.buttonStyle1;
+                        self.buttonColor.obj0.style = self.buttonStyle2;
+                        self.buttonColor.obj2.style = self.buttonStyle2;
+                        self.buttonColor.obj1.style = self.buttonStyle2;
+                          if (self.buttonColor.obj3.state == false) {
+                              self.buttonColor.obj3.state = true;
+                              self.getDataByOrder("price","ASC");
+                          }
+                          else {
+                            self.buttonColor.obj3.state = false;
+                            self.getDataByOrder("price","DESC");
+                          }
+                      }
+                  },
+                  getDataByOrder:function (pram1,pram2) {
+                    var self = this;
+                    self.comments = [];
+                    var resquesturl = localStorage.url+"products/";
+                    resquesturl+=pram1;
+                    reqwest({
+                        url:resquesturl,
+                        type:"json",
+                        method:"get",
+                        data:{order:pram2,page:1,size:100},
+                        success:function (resp) {
+                          self.comments = resp.data.rows;
+                        }
+                    })
+                  },
+                    getmemberId:function () {
+                      var self = this;
+                      reqwest({
+                          url:localStorage.url + "loginByCode",
+                          type:"json",
+                          method:"post",
+                          data:{code:"{{ queryset }}"},
+                          success:function (resp) {
+                            if (resp.result == true) {
+                              localStorage.removeItem("memberId");
+                              localStorage.memberId = String(resp.data.memberId);
+                            }
+                            self.getShoppingCartNum();
+                          }
+                      })
+                    },
+                    addProduct:function (product){
+                        // alert(product.name);
+                        var self = this;
+                        var resquesturl = localStorage.url + "addShoppingCart/";
+                        resquesturl+=localStorage.memberId;
+                        resquesturl+="/";
+                        resquesturl+=product.id;
+                        productArr.push(product);
+                        reqwest({
+                            url:resquesturl,
+                            type:"json",
+                            method:"post",
+                            data:{num:1},
+                            success:function (resp) {
+                                badgeView.style.cssText = "position: absolute;top: 20px;right: 1px;display:inline-block;";
+                                self.shoppingCartNum++;
+                            }
+                        })
+                    },
+                    getData:function () {
+                        var self = this;
+                        self.comments = [];
+                        reqwest({
+                            url:localStorage.url+"products?page=1&size=100",
+                            type:"json",
+                            method:"get",
+                            success:function (resp) {
+                                self.comments = resp.data.rows;
+
+                            }
+                        })
+                    }
+                },
+                ready:function () {
+                  if (code.length > 4) {
+                      localStorage.removeItem("memberId");
+                      this.getmemberId();
+                  }
+                  else {
+                    this.getShoppingCartNum();
+                  }
+                  this.getData();
+                }
+            });
+            window.onpageshow = function () {
+            }
+        </script>
+  </body>
+</html>
+<script>
+$(function(){
+    var $toast = $('#toast');
+    $('#showToast').on('click', function(){
+        if ($toast.css('display') != 'none') return;
+        $toast.fadeIn(100);
+        setTimeout(function () {
+            $toast.fadeOut(100);
+        }, 2000);
+    });
+})
+</script>
+<script type="text/javascript" src="{% static 'js/bottom.js' %}"></script>
+
+
+
+</script>

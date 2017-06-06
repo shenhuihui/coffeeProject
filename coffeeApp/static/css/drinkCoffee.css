@@ -1,0 +1,98 @@
+*{margin:0; padding:0; list-style:none; font-family:'微软雅黑', Arial; font-size:.16rem; text-decoration:none;}
+html{font-size:calc(100vw/3.75);}
+html, body{width:100%; height:100%;position: relative;-webkit-overflow-scrolling: touch;overflow:auto;overflow-x:hidden;}
+#searchBar {
+    margin: .08rem .22rem -.08rem .15rem;
+    width: 80%;
+    float:left;
+}
+[v-cloak] {
+    display: none !important;
+}
+.shopping {
+    background:url(../images/iocn-Shopping-h.png) center center no-repeat; width: .4rem; height: .4rem; background-size: .3rem ,.3rem;
+    margin-left:86%;
+    margin-top: .01rem;
+    position: fixed;
+    z-index: 10;
+}
+.advertisement {
+    background:url(../images/pic-Advertisement-2.png) center center no-repeat; overflow:hidden; width: 100%; height: 2.08rem; background-size: contain;
+}
+.selectButtons {
+    height: .43rem;
+    border-style: solid none solid none;
+    border-width:.01rem;
+    border-color: rgb(210, 210, 210);
+    width: 100%;
+}
+.button.default,.button.sale,.button.newProduct,.button.price,.button.list {
+     height:.43rem; line-height:.43rem; box-sizing:border-box; width: .82rem;
+     position: absolute;
+     text-align: center;
+}
+.button.sale,.button.newProduct,.button.price {
+    background:url(../images/iocn-direction-h.png) 85% center no-repeat; background-size: .11rem,.13rem;
+}
+.button.sale,.dividerLine1 {
+    margin-left: 21%;
+}
+.button.newProduct,.dividerLine2 {
+    margin-left: 42%;
+}
+.button.price,.dividerLine3 {
+    margin-left: 63%;
+}
+.button.list {
+    margin-left: 82%;
+    background:url(../images/iocn-list-h.png) center center no-repeat; background-size: .17rem,.17rem;
+}
+.dividerLine4 {
+    margin-left: 84%;
+}
+.dividerLine1, .dividerLine2, .dividerLine3, .dividerLine4 {
+    background-color: rgb(210, 210, 210);
+    width: .01rem;
+    height: .3rem;
+    position: absolute;
+    margin-top: .06rem;
+}
+.productList {
+    position: relative;width: 100%;
+}
+.product {
+    width: 100%;
+    height: 1.28rem;
+    border-style: none none solid none;
+    border-width: .01rem;
+    border-color: rgb(210, 210, 210);
+    position: relative;
+}
+.avatarView {
+    width: 1rem;
+    height: 1rem;
+    border-style: solid;
+    border-width: .01rem;
+    border-radius: .09rem;
+    margin: .14rem;
+    position: absolute;
+}
+.avatar {
+    border: 0;
+    border-radius: .09rem;
+    width: 1rem;
+    height: 1rem;
+}
+.content {
+    margin-top: .1rem;
+    margin-left: 1.25rem;
+    width: 65%;
+    position: absolute;
+}
+.addImage {
+    margin-left: 90%;
+    margin-top: 0.9rem;
+    width: .22rem;height: .22rem;
+    background:url(../images/iocn-Add-to-h.png) center center no-repeat; background-size: contain;
+    position: absolute;
+}

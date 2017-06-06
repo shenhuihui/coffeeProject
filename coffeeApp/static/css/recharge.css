@@ -1,0 +1,158 @@
+@charset "utf-8";
+*{margin:0; padding:0; list-style:none; font-family:'微软雅黑', Arial; font-size:.16rem; text-decoration:none;}
+html{font-size:calc(100vw/3.75);}
+html, body{width:100%; height:100%;position: relative;-webkit-overflow-scrolling: touch;overflow:auto;overflow-x:hidden;}
+body{background-color:#ffffff;}
+[v-cloak] {
+    display: none !important;
+}
+.rechargeView {
+    position: relative;
+    padding-bottom: 0px;
+}
+.recharge {
+    width: 100%;
+    margin-top: .05rem;
+    position: relative;
+}
+.part1 {
+    height: .48rem;position: relative;width: 100%;
+}
+.coupon {
+    position: absolute;height: .48rem;line-height: .42rem;margin-left: .2rem;
+}
+.part2 {
+    width: 100%;
+    margin-top: .05rem;
+    position: relative;
+    border-bottom: 1px solid #ededed;
+}
+.fwmc_xxk {
+    overflow: hidden;
+    width: 100%;
+    margin-left:2%;
+}
+.fwmc_xxk li {
+    float: left;
+    width: 40%;
+    height: .45rem;
+    background: #f2f2f2;
+    font-size: 18px;
+    color: #111111;
+    line-height: .45rem;
+    margin-right: .35rem;
+    text-align: center;
+    margin-bottom: 0.35rem;
+    overflow: hidden;
+    cursor: pointer;
+}
+ul, li {
+    list-style: none;
+}
+span, p, ul, li, h1, h2, h3, h4, h5, input {
+    margin: 0;
+    padding: 0;
+    font-weight: normal;
+}
+li {
+    display: list-item;
+    text-align: -webkit-match-parent;
+}
+.fwmc_xxk li.on {
+   /* background: url(../images/fw/fwkk.jpg) no-repeat center;*/
+   background-color: #76b133;
+    color: #ffffff;
+
+}
+
+ul, li {
+    list-style: none;
+}
+
+.content {
+    height: .48rem;position: relative;width: 100%;margin-top: .25rem;
+}
+
+.payment {
+    overflow: hidden;
+    width: 100%;
+    margin-left:2%;
+}
+.payment li {
+    float: left;
+    width: 40%;
+    height: .45rem;
+
+    font-size: 18px;
+    color: #111111;
+    margin-right: .35rem;
+
+    margin-bottom: 0.35rem;
+    overflow: hidden;
+
+}
+.payment li.imageUpdate{
+    float: right;
+    width: 40%;
+    height: .40rem;
+
+    margin-right: -0.8rem;
+
+    margin-bottom: 0.35rem;
+    overflow: hidden;
+
+}
+.imageUpdate .active{
+	width: 16%;
+    height: .25rem;
+}
+.payment li img{
+	width: 20%;
+	height: .30rem;
+}
+.payment li p{
+	font-size: .23rem;
+	margin-top: -2%;
+	width: 60%;
+	height: .45rem;
+	float: right;
+	padding-left: 10%;
+}
+.alipay{
+
+	margin-left: 1.5%;
+}
+.payment li.imageReplace {
+    float: right;
+    width: 40%;
+    height: .40rem;
+    margin-right: -0.8rem;
+    margin-bottom: 0.35rem;
+    overflow: hidden;
+}
+.imageReplace .active {
+    width: 16%;
+    height: .25rem;
+}
+.foot{
+	font-size: .12rem;
+	color: #828282;
+	text-align: center;
+	margin-top: 2rem;
+
+}
+.footView{
+
+	text-align: center;
+	background: #76b133;
+	height:.35rem;
+	margin: auto;
+  margin-top: .1rem;
+	width: 80%;
+}
+.footView p{
+	font-size: .20rem;
+	color: #ffffff;
+	padding-top: .05rem;
+
+}

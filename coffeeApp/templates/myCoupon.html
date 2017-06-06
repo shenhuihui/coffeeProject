@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+    <meta http-equiv="content-type" content="text/html; charset=">
+    <link rel="stylesheet" href="../static/css/weui.min.css" media="screen" title="no title" charset="">
+    <link rel="stylesheet" href="../static/css/myCoupon.css" media="screen" title="no title" charset="">   
+    <title>我的优惠券</title>
+  </head>
+  <body id="app" ontouchstart="">
+    <div class="viewHeader" style="width: 100%;height: .35rem;position: relative;background-color:#efeef4;">
+    </div>   
+    <div class="productView">
+      <div v-for="comment in comments" class="comments">
+        <div class="product">         
+            <div class="cancleBtn" v-on:click="cancleOrder(comment)">
+            	使用规则
+            </div>
+             
+            <div class="part2">
+              <img src="../static/images/iocn-Coupon.png">
+                <div class="first"><h1>首冲100送15个E豆</h1></div>
+                <div class="productDetail">
+                  <div class="coffee" v-for="coffees in comment.shoppingCarts">
+                      <div class="employ">
+                        已使用
+                      </div>
+                      <div class="failure">
+                      	失效期：2017-02-26
+                      </div>
+                      <div class="coffeeNum">
+                        数量：1
+                      </div>
+                  </div>
+                </div>
+            </div>
+          
+            </div>
+            
+                      
+           
+             
+            <div class="part2">
+              <img src="../static/images/iocn-Coupon.png">
+                <div class="first"><h1>星期五消费双倍积分</h1></div>
+                <div class="productDetail">
+                  <div class="coffee" v-for="coffees in comment.shoppingCarts">
+                      <div class="employ">
+                        已使用
+                      </div>
+                      <div class="failure">
+                      	失效期：2017-02-26
+                      </div>
+                      <div class="coffeeNum">
+                        数量：1
+                      </div>
+                  </div>
+                </div>
+            </div>
+            
+             <div class="part2">
+              <img src="../static/images/iocn-Coupon.png">
+                <div class="first"><h1>满送代金券</h1></div>
+                <div class="productDetail">
+                  <div class="coffee" v-for="coffees in comment.shoppingCarts">
+                      <div class="employ">
+                        已使用
+                      </div>
+                      <div class="failure">
+                      	失效期：2017-02-26
+                      </div>
+                      <div class="coffeeNum">
+                        数量：1
+                      </div>
+                  </div>
+                </div>
+            </div>
+            
+             <div class="part2">
+              <img src="../static/images/iocn-Coupon.png">
+                <div class="first"><h1>成为会员，领取豪礼！</h1></div>
+                <div class="productDetail">
+                  <div class="coffee" v-for="coffees in comment.shoppingCarts">
+                      <div class="employ">
+                        已使用
+                      </div>
+                      <div class="failure">
+                      	失效期：2017-02-26
+                      </div>
+                      <div class="coffeeNum">
+                        数量：1
+                      </div>
+                  </div>
+                </div>
+            </div>
+          
+            </div>
+       
+      </div>
+      <div class="drinkCoffee">喝咖啡</div>
+   
+   
+  </body>
+</html>
+

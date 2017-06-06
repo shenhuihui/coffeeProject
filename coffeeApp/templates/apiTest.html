@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <script type="text/javascript" src="{% static 'js/reqwest.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/jweixin-1.2.0.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/vue1.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/js.cookie.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'css/weui.min.css' %}">
+    {# <script type="text/javascript" src="{% static 'js/jquery-1.11.3.min.js' %}"></script> #}
+    <script type="text/javascript" src="{% static 'js/zepto.min.js' %}"></script>
+    <title>测试卡券API</title>
+  </head>
+  <body id="app" ontouchstart="">
+      <div class="" v-on:click="getTicket">
+        测试卡券API
+      </div>
+      <div class="weui-slider-box">
+            <div class="weui-slider">
+                <div id="sliderInner" class="weui-slider__inner">
+                    <div id="sliderTrack" style="width: 50%;" class="weui-slider__track"></div>
+                    <div id="sliderHandler" style="left: 50%;" class="weui-slider__handler"></div>
+                </div>
+            </div>
+            <div id="sliderValue" class="weui-slider-box__value">50</div>
+        </div>
+      <script>
+      $(function(){
+        var $sliderTrack = $('#sliderTrack'),
+            $sliderHandler = $('#sliderHandler'),
+            $sliderValue = $('#sliderValue');
+
+        var totalLen = $('#sliderInner').width(),
+            startLeft = 0,
+            startX = 0;
+
+        $sliderHandler
+            .on('touchstart', function (e) {
+                startLeft = parseInt($sliderHandler.css('left')) * totalLen / 100;
+                startX = e.changedTouches[0].clientX;
+            })
+            .on('touchmove', function(e){
+                var dist = startLeft + e.changedTouches[0].clientX - startX,
+                    percent;
+                dist = dist < 0 ? 0 : dist > totalLen ? totalLen : dist;
+                percent =  parseInt(dist / totalLen * 100);
+                $sliderTrack.css('width', percent + '%');
+                $sliderHandler.css('left', percent + '%');
+                $sliderValue.text(percent);
+
+                e.preventDefault();
+            })
+        ;
+    });
+          // var vm = new Vue({
+          //     el:"#app",
+          //     methods:{
+          //       getTicket:function(){
+          //         var self = this;
+          //         reqwest({
+          //             url:localStorage.url+"refreshAccessToken",
+          //             type:"json",
+          //             method:"post",
+          //             data:{url:window.location.href},
+          //             success:function (resp) {
+          //                 Cookies.set('access_token',resp.data);
+          //                 console.log(Cookies.get('access_token'));
+          //                 var date=new Date();
+          //                 date.setTime(date.getTime()+7200*1000);
+          //                 Cookies.Expires = date.toGMTString();
+          //             }
+          //           });
+          //                 reqwest({
+          //                     url:localStorage.url+"getConfigInfo",
+          //                     type:"json",
+          //                     method:"get",
+          //                     data:{url:window.location.href},
+          //                     success:function (resp) {
+          //                       wx.config({
+          //                         debug: true,
+          //                         appId: resp.data.appId,
+          //                         timestamp: resp.data.timestamp,
+          //                         nonceStr: resp.data.nonceStr,
+          //                         signature: resp.data.signature,
+          //                         jsApiList: [
+          //                             "openCard"
+          //                           ]
+          //                       });
+          //                       wx.ready(function() {
+          //                         wx.openCard({
+          //                           cardList: [
+          //                             {
+          //                               cardId: 'pElUowasDWvaay2Fi7nK81NDa1jM',
+          //                               code: '470492776848'
+          //                             },
+          //                             {
+          //                               cardId: 'pElUowasDWvaay2Fi7nK81NDa1jM',
+          //                               code: '230808352891'
+          //                             },
+          //                             {
+          //                               cardId: 'pElUowasDWvaay2Fi7nK81NDa1jM',
+          //                               code: '762164020430'
+          //                             },
+          //                             {
+          //                               cardId: 'pElUowasDWvaay2Fi7nK81NDa1jM',
+          //                               code: '691787655403'
+          //                             },
+          //                             {
+          //                               cardId: 'pElUowasDWvaay2Fi7nK81NDa1jM',
+          //                               code: '816934604169'
+          //                             }
+          //                           ]// 需要打开的卡券列表
+          //                         });
+          //                       });
+          //                       wx.error(function(res){
+          //                           alert(res.errMsg);
+          //                       });
+          //                     }
+          //                 })
+          //             },
+          //             getList:function() {
+          //
+          //               console.log(Cookies.get('access_token'));
+          //               reqwest({
+          //                   url:"https://api.weixin.qq.com/card/user/getcardlist",
+          //                   type:"jsonp",
+          //                   method:"post",
+          //                   headers:{'access_token': Cookies.get('access_token')},
+          //                   data:{'openid':"oElUowWSyJ2n3Ygr-WCc8wfOh9YQ",'card_id':"pElUowasDWvaay2Fi7nK81NDa1jM"},
+          //                   success:function (resp) {
+          //                       console.log(resp);
+          //                   }
+          //                 });
+          //             }
+          //           },
+          //           ready:function(){
+          //             if (Cookies.get('access_token') == "undefined") {
+          //               this.getTicket();
+          //             }
+          //           }
+          // });
+      </script>
+  </body>
+</html>

@@ -1,0 +1,204 @@
+<!DOCTYPE HTML>
+{% load staticfiles %}
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <link rel="stylesheet" href="{% static 'css/recharge.css' %}" media="screen" title="no title" charset="UTF-8">
+    <script type="text/javascript" src="{% static 'js/jquery-1.11.3.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/reqwest.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/vue1.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/jweixin-1.2.0.js' %}"></script>
+    <title>充值</title>
+  </head>
+<body id="app" ontouchstart="" v-cloak>
+  {% verbatim %}
+<div class="rechargeView">
+ 	 		<div class="recharge">
+            <div class="part1">
+                <div class="coupon">
+                 充值金额
+                 <span>(1元=10e豆)</span>
+                </div>
+            </div>
+
+            <div class="part2">
+            <ul class="fwmc_xxk">
+            <li class="on" id="1">
+              {{ comments[0].title }}</li>
+            <li id="2">
+              {{ comments[1].title }}</li>
+            <li id="3">
+              {{ comments[2].title }}</li>
+            <li id="4">
+              {{ comments[3].title }}</li>
+            <li id="5">
+              {{ comments[4].title }}</li>
+            <li id="6">
+              {{ comments[5].title }}</li>
+          </ul>
+            </div>
+            <!--<div class="content">
+            	<ul class="payment">
+            		<li class="weixin">
+            		<img src="../static/images/ic_recharge_wechat.png" />
+                     <p>微信</p>
+            		</li>
+            		<li class="imageUpdate">
+            			<img src="../static/images/iocn-Check-s.png" class="active" id="caocao_pic" onClick="change_pic()"/>
+            		</li>
+            		<li class="alipay">
+            		<img src="../static/images/ic_recharge_alipay.png" />
+                     <p>支付宝</p>
+            		</li>
+            		<li class="imageReplace">
+            			<img src="../static/images/iocn-Check-s.png" class="active" id="caocao_pic1" onClick="replace_pic()"/>
+            		</li>
+            	</ul>-->
+            </div>
+            <div class="foot">
+            	E乐饮不会以任何形式要求您输入银行账户和密码
+            </div>
+            <div class="footView" v-on:click="payCart">
+            	<p>充值</p>
+            </div>
+
+ 	  	 </div>
+
+ </div>
+ {% endverbatim %}
+ <script>
+ var targetId = "1";
+ var vm = new Vue({
+     el:"#app",
+     data:{
+       comments:[],
+     },
+     methods:{
+       wxconfig:function(){
+         reqwest({
+             url:localStorage.url+"getConfigInfo",
+             type:"json",
+             method:"get",
+             data:{url:window.location.href},
+             success:function (resp) {
+               wx.config({
+                 debug: false,
+                 appId: resp.data.appId,
+                 timestamp: resp.data.timestamp,
+                 nonceStr: resp.data.nonceStr,
+                 signature: resp.data.signature,
+                 jsApiList: [
+                     'chooseWXPay'
+                   ]
+               });
+               wx.error(function(res){
+                   alert(res.errMsg);
+               });
+             }
+           });
+       },
+       getData:function() {
+         var self = this;
+         reqwest({
+             url:localStorage.url+"getEBeanProductList",
+             type:"json",
+             method:"get",
+             success:function (resp) {
+               if (resp.result == false) {
+                   alert(resp.message);
+                   return;
+               }
+               self.comments = resp.data;
+             },
+             error:function(){
+               alert("请求超时");
+             }
+         })
+       },
+       payCart:function() {
+         var self = this;
+         reqwest({
+             url:localStorage.url+"ebeanRecharge",
+             type:"json",
+             method:"post",
+             contentType: "application/json",
+             data:JSON.stringify({ebeanProductId:targetId,memberId:localStorage.memberId}),
+             success:function (resp) {
+               if (resp.result == false) {
+                   alert(resp.message);
+                   return;
+               }
+                 wx.chooseWXPay({
+                   appId: resp.data.appId,
+                   timestamp: resp.data.timeStamp,
+                   nonceStr: resp.data.nonceStr,
+                   package: resp.data.package,
+                   signType: 'MD5',
+                   paySign: resp.data.paySign,
+                   success: function(res) {
+                     self.getEBean();
+                   },
+                   fail: function (res) {
+                     alert(res.errMsg);
+                   }
+                 });
+             },
+             error:function(){
+               alert("请求超时");
+             }
+         })
+       },
+       getEBean:function(){
+         reqwest({
+             url:localStorage.url+"getEBeanByMemberId",
+             type:"json",
+             method:"get",
+             data:{memberId:localStorage.memberId},
+             success:function (resp) {
+               localStorage.eNum = resp.data.totalNum;
+             },
+             error:function(){
+               alert("请求超时");
+             }
+         })
+       }
+     },
+     ready:function() {
+       this.getData();
+       this.wxconfig();
+     }
+   });
+   $(document).ready(function(e) {
+     $(".fwmc_xxk li").click(function(){
+ 		$(this).addClass("on").siblings().removeClass("on");
+    targetId = this.id;
+ 		});
+ });
+ </script>
+ <!-- <script>
+	/*图片切换*/
+function change_pic(){
+var imgObj = document.getElementById("caocao_pic");
+if(imgObj.getAttribute("src",2)=="../static/images/iocn-Check-s.png"){
+imgObj.src="../static/images/iocn-Check-h.png";
+}else{
+imgObj.src="../static/images/iocn-Check-s.png";
+}
+}
+function replace_pic(){
+var imgObj = document.getElementById("caocao_pic1");
+if(imgObj.getAttribute("src",2)=="../static/images/iocn-Check-s.png"){
+imgObj.src="../static/images/iocn-Check-h.png";
+}else{
+imgObj.src="../static/images/iocn-Check-s.png";
+}
+}
+
+
+
+</script>-->
+</body>
+</html>

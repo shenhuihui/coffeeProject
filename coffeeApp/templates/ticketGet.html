@@ -1,0 +1,63 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+    <meta http-equiv="content-type" content="text/html; charset=">
+    <link rel="stylesheet" href="../static/css/weui.min.css" media="screen" title="no title" charset="">
+    <link rel="stylesheet" href="../static/css/ticketGet.css" media="screen" title="no title" charset="">  
+    <script type="text/javascript" src="../static/js/vue1.js"></script>
+    <script type="text/javascript" src="../static/js/reqwest.js"></script>
+    <title>优惠券领取</title>
+  </head>
+<body id="app" ontouchstart="">
+<div class="productView">
+	<div v-for="comment in comments" class="comments">
+			<div class="product">             
+            <div class="head">
+            	<img src="../static/images/pic-Coffee.png"/>              	
+            </div>
+            <div class="content">
+            	<img src="../static/images/vdoz34iz.jpg"/>            	
+            </div>            
+            <div class="user">用户名</div>
+            <div class="coffee">送你一杯咖啡，让你活力满满!</div>           	
+            <div class="phone">
+            	  <input type="text" class="weui-search-bar__input" id="searchInput" placeholder="输入手机号，领取优惠" required/>
+            </div>
+          
+            <div class="get" onclick="getCoffee()">
+            	领取咖啡
+            	
+            </div>
+            <div id="rule">
+            	<img src="../static/images/iocn-Check-s.png" class="active" width="18" height="18"  id="caocao_pic" onClick="change_pic()"/>      	
+              
+            	我已阅读并同意E乐饮的<span style="color: #77b937; font-size: .14rem;">[活动规则]</span>
+            	
+            </div>                              
+            </div>	
+		
+	</div>
+	
+</div>
+
+</body>
+<script>
+	/*图片切换*/
+function change_pic(){
+var imgObj = document.getElementById("caocao_pic");
+if(imgObj.getAttribute("src",2)=="../static/images/iocn-Check-s.png"){
+imgObj.src="../static/images/iocn-Check-h.png";
+}else{
+imgObj.src="../static/images/iocn-Check-s.png";
+}
+}	
+</script>
+ 
+
+
+
+
+</html>

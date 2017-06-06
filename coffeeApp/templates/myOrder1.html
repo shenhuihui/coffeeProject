@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <link rel="stylesheet" href="{% static 'css/weui.min.css' %}" media="screen" title="no title" charset="utf-8">
+    <link rel="stylesheet" href="{% static 'css/myOrder1.css' %}" media="screen" title="no title" charset="utf-8">
+	  <script type="text/javascript" src="{% static 'js/reqwest.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/vue1.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/jquery-1.11.3.min.js' %}"></script>
+    <title>已付款</title>
+  </head>
+  <script>
+  window.onpageshow = function () {
+      if (localStorage.updateMyOrder == "true") {
+        localStorage.updateMyOrder = false;
+        window.location.reload();
+  }
+}
+  </script>
+  <body id="app" ontouchstart="" v-cloak>
+    <div v-show="hasData">
+      <div class="viewHeader" style="width: 100%;height: .35rem;position: relative;background-color:white;">
+      	{% verbatim %}
+        <ul id="hear">
+        		<!--<li class="action" v-blind:style="border-bottom:12px solid red;height:43px;"><a href="#" >全部<span >({{ commentsAll.length }})</span></a></li>
+  					<li><a href="#" >已付款<span >({{ comments.length }})</span></a></li>
+  					<li><a href="#" >未付款<span >({{ comments2.length }})</span></a></li>-->
+
+
+        </ul>
+      </div>
+      <!--<ul  id="contentop">
+      <li class="action">
+      <div class="productView">
+        <div v-for="comment in commentsAll" class="">
+          <div class="product" v-on:click="orderDetail(comment.id)">
+              <div class="part1">
+                  <div class="orderId">
+                      订单号：{{ comment.id }}
+                  </div>
+                  <div class="payStatus" v-if="comment.payState">
+                    已付款
+                  </div>
+                  <div class="payStatus" v-else>
+                    未付款
+                  </div>
+              </div>
+              <div class="part2">
+                  <div class="createDate">{{ comment.createDate }}</div>
+                  <div class="productDetail">
+                    <div class="coffee" v-for="coffees in comment.shoppingCarts">
+                    	<div class="coffeeImages">
+                    		 <img class="avatar" v-bind:src="coffees.product.pictureUrl" alt="" />
+
+                    	</div>
+                        <div class="coffeeName">
+                          {{ coffees.product.name }}
+
+                        </div>
+                        <div class="coffeeNum">
+
+                          数量：{{ coffees.num }}
+                        </div>
+                    </div>
+                  </div>
+              </div>
+              <div class="part3">
+                <div class="productsNum">
+                    共{{ comment.total }}件商品
+                </div>
+                <div class="orderAccount" v-if="comment.discountMoney > 0">
+                    实收款：<span style="font-size:14;">￥{{ comment.discountMoney }}</span>
+                </div>
+                <div class="orderAccount" v-else>
+                    实收款：<span style="font-size:14;">￥{{ comment.money }}</span>
+                </div>
+              </div>
+          </div>
+        </div>
+      </div>
+      </li>-->
+
+
+      <!--<li >-->
+      <div class="productView">
+        <div v-for="comment in comments" class="">
+          <div class="product" v-on:click="orderDetail(comment.id)">
+              <div class="part1">
+                  <div class="orderId">
+                      订单号：{{ comment.id }}
+                  </div>
+                  <div class="payStatus">
+                      已付款
+                  </div>
+              </div>
+              <div class="part2">
+                  <div class="createDate">{{ comment.createDate }}</div>
+                  <div class="productDetail">
+                    <div class="coffee" v-for="coffees in comment.shoppingCarts">
+                    	<div class="coffeeImages">
+                    		<!--<img src="images/pic-Mocha.png" />
+                    		<img src="images/pic-Black.png" />-->
+
+                    		<img class="avatar" v-bind:src="coffees.product.pictureUrl" alt="" />
+                    	</div>
+                        <div class="coffeeName">
+
+                          {{ coffees.product.name }}
+                        </div>
+                        <div class="coffeeNum">
+                          数量：{{ coffees.num }}
+
+                        </div>
+                    </div>
+                  </div>
+              </div>
+              <div class="part3">
+                <div class="productsNum">
+                    共{{ comment.total }}件商品
+                </div>
+                <div class="orderAccount" v-if="comment.discountMoney">
+                    实收款：<span style="font-size:14;">￥{{ comment.discountMoney }}</span>
+                </div>
+                <div class="orderAccount" v-else>
+                    实收款：<span style="font-size:14;">￥{{ comment.money }}</span>
+                </div>
+              </div>
+          </div>
+        </div>
+      </div>
+    <!--</li>-->
+
+      <!--<li><div class="productView">
+        <div v-for="comment in comments2" class="">
+          <div class="product" v-on:click="orderDetail(comment.id)">
+              <div class="part1">
+                  <div class="orderId">
+                      订单号：{{ comment.id }}
+                  </div>
+                  <div class="payStatus">
+                     未付款
+                  </div>
+              </div>
+              <div class="part2">
+                  <div class="createDate">{{ comment.createDate }}</div>
+                  <div class="productDetail">
+                    <div class="coffee" v-for="coffees in comment.shoppingCarts">
+                    	<div class="coffeeImages">
+                    		<img src="images/pic-Mocha.png" />
+                    		<img src="images/pic-Black.png" />
+
+
+                    		<img class="avatar" v-bind:src="coffees.product.pictureUrl" alt="" />
+                    	</div>
+                        <div class="coffeeName">
+
+                         {{ coffees.product.name }}
+                        </div>
+                        <div class="coffeeNum">
+                          数量：{{ coffees.num }}
+
+                        </div>
+                    </div>
+                  </div>
+              </div>
+              <div class="part3">
+                <div class="productsNum">
+
+                     共{{ comment.total }}件商品
+                </div>
+                <div class="orderAccount" v-if="comment.discountMoney > 0">
+                    实收款：<span style="font-size:14;">￥{{ comment.discountMoney }}</span>
+                </div>
+                <div class="orderAccount" v-else>
+                    实收款：<span style="font-size:14;">￥{{ comment.money }}</span>
+                </div>
+              </div>
+          </div>
+        </div>
+      </div></li>-->
+   <!--</ul>-->
+    </div>
+    <div id="notData" style="width: 100%;height: 50%;text-align: center;margin-top:.2rem;" v-show="!hasData">
+      <a href="/index">
+        <span class="context" style="font-size:.2rem;">
+        {{ loadingTest }}
+        </span>
+      </a>
+    </div>
+{% endverbatim %}
+
+      <script>
+            var vm = new Vue({
+                el:"#app",
+                data:{
+                  loadingTest:"加载中...",
+                  hasData:false,
+                    comments:[],
+                    comments2:[],
+                    commentsAll:[],
+                },
+                methods:{
+                  add0:function(m){return m<10?'0'+m:m },
+                  format:function(shijianchuo)
+                  {
+                    var time = new Date(shijianchuo);
+                    var y = time.getFullYear();
+                    var m = time.getMonth()+1;
+                    var d = time.getDate();
+                    var h = time.getHours();
+                    var mm = time.getMinutes();
+                    var s = time.getSeconds();
+                    return y+'-'+this.add0(m)+'-'+this.add0(d)+' '+this.add0(h)+':'+this.add0(mm)+':'+this.add0(s);
+                  },
+                  getOrder:function(){
+                    var self = this;
+                    reqwest({
+                        url:localStorage.url+"orders",
+                        type:"json",
+                        method:"get",
+                        data:{memberId:localStorage.memberId,payState:1},
+                        success:function (resp) {
+                            self.comments = resp.data;
+                            if (self.comments) {
+                              self.hasData = true;
+                              for (var i = 0; i < self.comments.length; i++) {
+                                  self.comments[i].createDate = self.format(self.comments[i].createDate);
+                              }
+                            }
+                            else{
+                              self.loadingTest = "暂无数据 去逛逛";
+  														 self.hasData = false;
+  													}
+                        },
+                        error:function(){
+                          alert("请求超时");
+                        }
+                    })
+                  },
+                  // getOrder2:function(){
+                  //   var self = this;
+                  //   reqwest({
+                  //       url:localStorage.url+"orders",
+                  //       type:"json",
+                  //       method:"get",
+                  //       data:{memberId:localStorage.memberId,payState:0},
+                  //       success:function (resp) {
+                  //           self.comments2 = resp.data;
+                  //           self.getOrder3();
+                  //       }
+                  //   })
+                  // },
+                  // getOrder3:function(){
+                  //   var self = this;
+                  //   reqwest({
+                  //       url:localStorage.url+"orders",
+                  //       type:"json",
+                  //       method:"get",
+                  //       data:{memberId:localStorage.memberId,payState:2},
+                  //       success:function (resp) {
+                  //           Array.prototype.push.apply(self.comments2,resp.data);
+                  //           if (self.comments2) {
+                  //             for (var i = 0; i < self.comments2.length; i++) {
+                  //                 self.comments2[i].createDate = self.format(self.comments2[i].createDate);
+                  //             }
+                  //           }
+                  //
+                  //
+                  //           self.commentsAll = self.comments.concat(self.comments2);
+                  //
+                  //       }
+                  //   })
+                  // },
+                  orderDetail:function(productId){
+                    var resquesturl = "orderDetail.html?orderId=";
+                    resquesturl+=productId;
+                    window.location.href = resquesturl;
+                  },
+                },
+                ready:function () {
+                    this.getOrder();
+                    // this.getOrder2();
+                }
+            });
+      </script>
+
+  </body>
+</html>
+<script>
+	/*滑动效果*/
+		$(function(){
+					$("#hear li").click(function(){
+						$(this).css({
+							borderBottom: "2px solid red",
+							height:"43px"
+						}).siblings().css({
+							borderBottom: "none",
+							height:"45px"
+						});
+					});
+
+					$("#hear li").click(function(){
+						$(this).addClass("action").siblings().removeClass("action");
+						var index = $(this).index();
+						$("#contentop li").eq(index).css("display","block").siblings().css("display","none");
+					});
+		});
+
+
+</script>
